@@ -1917,19 +1917,6 @@
     }
   ],
   "entries": {
-    "2026-07-05": [
-      {
-        "id": "aw5f6qzj",
-        "taskId": "sport",
-        "note": "",
-        "done": true
-      },
-      {
-        "id": "m1xx40dw",
-        "taskId": "ccna",
-        "note": "",
-        "done": false
-      }
-    ]
+    "2026-07-05": []
   }
 }
