@@ -1929,6 +1929,12 @@
         "taskId": "sport",
         "note": "",
         "done": false
+      },
+      {
+        "id": "m1xx40dw",
+        "taskId": "ccna",
+        "note": "",
+        "done": false
       }
     ]
   }
