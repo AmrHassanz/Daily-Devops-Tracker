@@ -1,0 +1,1771 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Desk Lamp — Study & Habit Tracker</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0e131a;
+    --bg-soft:#141b24;
+    --panel:#1a2230;
+    --panel-2:#202a3a;
+    --border:#2b3644;
+    --text:#eae6dc;
+    --text-dim:#93a0b0;
+    --text-faint:#5d6b7c;
+    --amber:#e2a84f;
+    --amber-soft:rgba(226,168,79,.14);
+    --amber-glow:rgba(226,168,79,.35);
+    --good:#7fae8a;
+    --danger:#c96a5e;
+
+    --c-quran:#4fb0a6;
+    --c-sport:#d1596b;
+    --c-ccna:#5b8ef0;
+    --c-devops:#a084e8;
+    --c-python:#9bc158;
+
+    --radius:14px;
+    --radius-sm:9px;
+    font-family:'Inter',sans-serif;
+  }
+
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    background:
+      radial-gradient(ellipse 900px 500px at 18% -10%, var(--amber-soft), transparent 60%),
+      var(--bg);
+    color:var(--text);
+    min-height:100vh;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  ::selection{background:var(--amber-glow);}
+
+  a{color:var(--amber);}
+
+  /* ---------- layout ---------- */
+  .app{
+    max-width:1400px;
+    margin:0 auto;
+    padding:28px 28px 60px;
+  }
+
+  header.top{
+    display:flex;
+    align-items:flex-end;
+    justify-content:space-between;
+    gap:24px;
+    margin-bottom:26px;
+    flex-wrap:wrap;
+  }
+
+  .brand{
+    display:flex;
+    align-items:center;
+    gap:14px;
+  }
+  .lamp-mark{
+    width:40px;height:40px;flex:none;
+  }
+  .brand h1{
+    font-family:'Fraunces',serif;
+    font-weight:600;
+    font-size:28px;
+    margin:0;
+    letter-spacing:.2px;
+  }
+  .brand p{
+    margin:2px 0 0;
+    color:var(--text-dim);
+    font-size:13px;
+  }
+
+  .stats{
+    display:flex;
+    gap:10px;
+    flex-wrap:wrap;
+  }
+  .stat{
+    background:var(--panel);
+    border:1px solid var(--border);
+    border-radius:var(--radius-sm);
+    padding:9px 16px;
+    text-align:center;
+    min-width:92px;
+  }
+  .stat .num{
+    font-family:'JetBrains Mono',monospace;
+    font-weight:600;
+    font-size:19px;
+    color:var(--amber);
+    display:block;
+    line-height:1.1;
+  }
+  .stat .label{
+    font-size:10.5px;
+    color:var(--text-dim);
+    text-transform:uppercase;
+    letter-spacing:.06em;
+  }
+
+  /* ---------- main grid ---------- */
+  .layout{
+    display:grid;
+    grid-template-columns:260px 1fr;
+    gap:22px;
+    align-items:start;
+  }
+  @media (max-width:920px){
+    .layout{grid-template-columns:1fr;}
+  }
+
+  /* ---------- sidebar ---------- */
+  .sidebar h2{
+    font-family:'Fraunces',serif;
+    font-size:15px;
+    font-weight:600;
+    color:var(--text-dim);
+    text-transform:uppercase;
+    letter-spacing:.08em;
+    margin:0 0 10px 4px;
+  }
+  .task-card{
+    background:var(--panel);
+    border:1px solid var(--border);
+    border-left:4px solid var(--task-color, var(--amber));
+    border-radius:var(--radius-sm);
+    padding:12px 12px 10px;
+    margin-bottom:10px;
+    cursor:grab;
+    transition:transform .12s ease, box-shadow .12s ease, border-color .12s ease;
+  }
+  .task-card:hover{
+    transform:translateY(-1px);
+    box-shadow:0 6px 18px -8px rgba(0,0,0,.55);
+  }
+  .task-card.dragging{opacity:.4;}
+  .task-card .row1{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:8px;
+  }
+  .task-card .name{
+    font-weight:600;
+    font-size:14px;
+  }
+  .task-card .drag-dots{
+    color:var(--text-faint);
+    font-size:13px;
+    letter-spacing:1px;
+    user-select:none;
+  }
+  .task-card .meta{
+    margin-top:6px;
+    font-size:11.5px;
+    color:var(--text-dim);
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+  }
+  .task-card .progress-track{
+    flex:1;
+    height:4px;
+    background:var(--panel-2);
+    border-radius:2px;
+    margin-right:8px;
+    overflow:hidden;
+  }
+  .task-card .progress-fill{
+    height:100%;
+    background:var(--task-color, var(--amber));
+    border-radius:2px;
+  }
+  .toggle-curric{
+    background:none;
+    border:none;
+    color:var(--text-dim);
+    font-size:11px;
+    cursor:pointer;
+    padding:0;
+    text-decoration:underline;
+    text-decoration-style:dotted;
+    text-underline-offset:2px;
+  }
+  .toggle-curric:hover{color:var(--text);}
+
+  .curriculum{
+    display:none;
+    margin-top:10px;
+    padding-top:10px;
+    border-top:1px dashed var(--border);
+  }
+  .curriculum.open{display:block;}
+  .curriculum .curric-note{
+    font-size:10.5px;
+    color:var(--text-faint);
+    margin:0 0 8px;
+    font-style:italic;
+    line-height:1.4;
+  }
+  .curric-item{
+    display:flex;
+    align-items:flex-start;
+    gap:7px;
+    font-size:12.5px;
+    padding:4px 0;
+    color:var(--text-dim);
+    cursor:pointer;
+  }
+  .curric-item input{
+    margin-top:2px;
+    accent-color:var(--task-color, var(--amber));
+    flex:none;
+  }
+  .curric-item.done span{
+    color:var(--text-faint);
+    text-decoration:line-through;
+  }
+
+  /* ---------- CRUD controls ---------- */
+  .card-actions{
+    display:flex;
+    align-items:center;
+    gap:2px;
+    flex:none;
+  }
+  .icon-btn{
+    background:none;
+    border:none;
+    color:var(--text-faint);
+    cursor:pointer;
+    font-size:12px;
+    padding:2px 4px;
+    border-radius:5px;
+    line-height:1;
+    transition:color .12s ease, background .12s ease;
+  }
+  .icon-btn:hover{color:var(--text); background:var(--panel-2);}
+  .icon-btn.danger:hover{color:var(--danger);}
+
+  .inline-edit{
+    width:100%;
+    background:var(--bg-soft);
+    border:1px solid var(--amber);
+    border-radius:6px;
+    color:var(--text);
+    font-family:inherit;
+    font-size:inherit;
+    padding:3px 6px;
+  }
+
+  .curric-group{
+    margin-bottom:10px;
+  }
+  .curric-group-header{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:6px;
+    margin:8px 0 2px;
+  }
+  .curric-group-title{
+    font-size:11px;
+    font-weight:600;
+    text-transform:uppercase;
+    letter-spacing:.04em;
+    color:var(--text-dim);
+  }
+  .curric-item{
+    position:relative;
+    padding-right:38px;
+  }
+  .curric-item .item-actions{
+    position:absolute;
+    right:0;
+    top:2px;
+    display:flex;
+    gap:0;
+    opacity:.55;
+  }
+  .curric-item .item-actions .icon-btn{font-size:10.5px;}
+  .curric-item:hover .item-actions{opacity:1;}
+
+  .add-item-row, .add-group-row{
+    margin-top:4px;
+  }
+  .add-link{
+    background:none;
+    border:none;
+    color:var(--text-faint);
+    font-size:11.5px;
+    cursor:pointer;
+    padding:3px 0;
+  }
+  .add-link:hover{color:var(--amber);}
+  .add-item-input, .add-group-input{
+    display:none;
+    width:100%;
+    margin-top:4px;
+    background:var(--bg-soft);
+    border:1px solid var(--border);
+    border-radius:6px;
+    color:var(--text);
+    font-family:inherit;
+    font-size:12px;
+    padding:5px 7px;
+  }
+  .add-item-input.open, .add-group-input.open{display:block;}
+  .add-item-input:focus, .add-group-input:focus{outline:1px solid var(--amber);}
+
+  .add-task-box{margin-top:6px;}
+  .add-task-btn{
+    width:100%;
+    background:var(--panel);
+    border:1px dashed var(--border);
+    color:var(--text-dim);
+    border-radius:var(--radius-sm);
+    padding:10px;
+    font-size:13px;
+    cursor:pointer;
+    font-family:inherit;
+  }
+  .add-task-btn:hover{border-color:var(--amber); color:var(--text);}
+  .add-task-form{
+    display:none;
+    background:var(--panel);
+    border:1px solid var(--border);
+    border-radius:var(--radius-sm);
+    padding:12px;
+    margin-top:8px;
+  }
+  .add-task-form.open{display:block;}
+  .add-task-form input[type=text]{
+    width:100%;
+    background:var(--bg-soft);
+    border:1px solid var(--border);
+    border-radius:6px;
+    color:var(--text);
+    font-family:inherit;
+    font-size:13px;
+    padding:7px 9px;
+    margin-bottom:10px;
+  }
+  .add-task-form input[type=text]:focus{outline:1px solid var(--amber);}
+  .color-swatches{
+    display:flex;
+    flex-wrap:wrap;
+    gap:7px;
+    margin-bottom:10px;
+  }
+  .swatch{
+    width:22px;height:22px;
+    border-radius:50%;
+    cursor:pointer;
+    border:2px solid transparent;
+  }
+  .swatch.selected{
+    border-color:var(--text);
+    box-shadow:0 0 0 2px var(--bg);
+  }
+  .form-actions{display:flex;gap:8px;}
+
+  .sidebar-note{
+    margin-top:18px;
+    font-size:12px;
+    color:var(--text-faint);
+    background:var(--panel);
+    border:1px solid var(--border);
+    border-radius:var(--radius-sm);
+    padding:12px;
+    line-height:1.5;
+  }
+
+  /* ---------- board ---------- */
+  .board-head{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    margin-bottom:14px;
+    gap:10px;
+    flex-wrap:wrap;
+  }
+  .week-nav{
+    display:flex;
+    align-items:center;
+    gap:8px;
+  }
+  .week-nav .range{
+    font-family:'Fraunces',serif;
+    font-size:16px;
+    min-width:190px;
+    text-align:center;
+  }
+  button.nav-btn, button.today-btn, button.io-btn{
+    background:var(--panel);
+    border:1px solid var(--border);
+    color:var(--text);
+    border-radius:8px;
+    padding:7px 12px;
+    cursor:pointer;
+    font-family:inherit;
+    font-size:13px;
+    transition:background .12s ease,border-color .12s ease;
+  }
+  button.nav-btn{padding:7px 10px;}
+  button.nav-btn:hover, button.today-btn:hover, button.io-btn:hover{
+    border-color:var(--amber);
+    background:var(--panel-2);
+  }
+  .io-group{display:flex;gap:8px;}
+
+  .week-grid{
+    display:grid;
+    grid-template-columns:repeat(7,1fr);
+    gap:12px;
+  }
+  @media (max-width:1100px){
+    .week-grid{grid-template-columns:repeat(auto-fit,minmax(190px,1fr));}
+  }
+
+  .day-col{
+    background:var(--panel);
+    border:1px solid var(--border);
+    border-radius:var(--radius);
+    min-height:220px;
+    display:flex;
+    flex-direction:column;
+    transition:box-shadow .15s ease, border-color .15s ease;
+  }
+  .day-col.today{
+    border-color:var(--amber);
+  }
+  .day-col.dragover{
+    box-shadow:0 0 0 2px var(--amber-glow) inset;
+    background:var(--panel-2);
+  }
+  .day-col.all-done{
+    box-shadow:0 0 24px -6px var(--amber-glow);
+  }
+  .day-head{
+    padding:10px 12px 8px;
+    border-bottom:1px solid var(--border);
+  }
+  .day-head .dow{
+    font-size:10.5px;
+    text-transform:uppercase;
+    letter-spacing:.08em;
+    color:var(--text-dim);
+  }
+  .day-head .dnum{
+    font-family:'Fraunces',serif;
+    font-size:20px;
+    font-weight:600;
+  }
+  .day-col.today .day-head .dnum{color:var(--amber);}
+  .day-body{
+    flex:1;
+    padding:10px;
+    display:flex;
+    flex-direction:column;
+    gap:8px;
+  }
+  .day-body:empty::after{
+    content:"drop a task here";
+    color:var(--text-faint);
+    font-size:11.5px;
+    font-style:italic;
+  }
+
+  .entry{
+    background:var(--panel-2);
+    border:1px solid var(--border);
+    border-left:3px solid var(--entry-color,var(--amber));
+    border-radius:9px;
+    padding:8px 9px;
+  }
+  .entry.done{opacity:.55;}
+  .entry .erow{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:6px;
+  }
+  .entry .ename{
+    font-size:12.5px;
+    font-weight:600;
+    display:flex;
+    align-items:center;
+    gap:6px;
+  }
+  .entry .ename input[type=checkbox]{
+    accent-color:var(--entry-color,var(--amber));
+  }
+  .entry.done .ename span{text-decoration:line-through;color:var(--text-dim);}
+  .entry .del{
+    background:none;border:none;color:var(--text-faint);
+    cursor:pointer;font-size:14px;line-height:1;padding:0 2px;
+  }
+  .entry .del:hover{color:var(--danger);}
+  .entry textarea{
+    width:100%;
+    margin-top:6px;
+    background:var(--bg-soft);
+    border:1px solid var(--border);
+    border-radius:6px;
+    color:var(--text);
+    font-family:'Inter',sans-serif;
+    font-size:11.5px;
+    padding:6px 7px;
+    resize:vertical;
+    min-height:32px;
+  }
+  .entry textarea::placeholder{color:var(--text-faint);}
+  .entry textarea:focus{outline:1px solid var(--amber);}
+
+  footer.hint{
+    margin-top:26px;
+    font-size:11.5px;
+    color:var(--text-faint);
+    text-align:center;
+  }
+
+  /* ---------- sync button + modal ---------- */
+  .sync-btn{display:flex;align-items:center;gap:7px;}
+  .sync-dot{
+    width:8px;height:8px;border-radius:50%;
+    background:var(--text-faint);
+    flex:none;
+    transition:background .2s ease;
+  }
+  .sync-dot.pending{background:var(--amber); animation:pulse 1.2s infinite;}
+  .sync-dot.syncing{background:var(--amber); animation:pulse .6s infinite;}
+  .sync-dot.synced{background:var(--good);}
+  .sync-dot.error{background:var(--danger);}
+  @keyframes pulse{
+    0%,100%{opacity:1;} 50%{opacity:.35;}
+  }
+
+  .modal-overlay{
+    display:none;
+    position:fixed;
+    inset:0;
+    background:rgba(6,9,13,.72);
+    align-items:center;
+    justify-content:center;
+    z-index:50;
+    padding:20px;
+  }
+  .modal-overlay.open{display:flex;}
+  .modal-panel{
+    background:var(--panel);
+    border:1px solid var(--border);
+    border-radius:var(--radius);
+    padding:22px;
+    max-width:440px;
+    width:100%;
+    max-height:88vh;
+    overflow-y:auto;
+    box-shadow:0 20px 60px -12px rgba(0,0,0,.6);
+  }
+  .modal-head{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    margin-bottom:6px;
+  }
+  .modal-head h3{
+    font-family:'Fraunces',serif;
+    font-size:19px;
+    margin:0;
+  }
+  .modal-desc{
+    font-size:12.5px;
+    color:var(--text-dim);
+    line-height:1.55;
+    margin:0 0 16px;
+  }
+  .modal-label{
+    display:block;
+    font-size:11px;
+    text-transform:uppercase;
+    letter-spacing:.05em;
+    color:var(--text-dim);
+    margin:12px 0 5px;
+  }
+  .modal-label span{
+    text-transform:none;
+    letter-spacing:0;
+    color:var(--text-faint);
+    font-size:11px;
+  }
+  .modal-panel input[type=text], .modal-panel input[type=password]{
+    width:100%;
+    background:var(--bg-soft);
+    border:1px solid var(--border);
+    border-radius:7px;
+    color:var(--text);
+    font-family:'JetBrains Mono',monospace;
+    font-size:12.5px;
+    padding:8px 10px;
+  }
+  .modal-panel input:focus{outline:1px solid var(--amber);}
+  .modal-status{
+    margin-top:14px;
+    font-size:12px;
+    color:var(--text-dim);
+    background:var(--bg-soft);
+    border:1px solid var(--border);
+    border-radius:8px;
+    padding:8px 10px;
+    line-height:1.5;
+  }
+  .modal-actions{
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px;
+    margin-top:16px;
+  }
+  button.danger-btn{
+    border-color:var(--danger);
+    color:var(--danger);
+  }
+  button.danger-btn:hover{
+    background:rgba(201,106,94,.12);
+  }
+
+  input[type=file]{display:none;}
+</style>
+</head>
+<body>
+<div class="app">
+
+  <header class="top">
+    <div class="brand">
+      <svg class="lamp-mark" viewBox="0 0 48 48" fill="none">
+        <path d="M24 4 L38 20 H10 Z" fill="#e2a84f" opacity="0.9"/>
+        <rect x="22" y="20" width="4" height="14" fill="#5d6b7c"/>
+        <ellipse cx="24" cy="38" rx="12" ry="3.2" fill="#2b3644"/>
+        <circle cx="24" cy="14" r="3" fill="#141b24"/>
+      </svg>
+      <div>
+        <h1>Desk Lamp</h1>
+        <p>keep the light on — one day, one task at a time</p>
+      </div>
+    </div>
+    <div class="stats" id="statsBar"></div>
+    <button id="syncBtn" class="io-btn sync-btn" type="button">
+      <span class="sync-dot" id="syncDot"></span> Sync
+    </button>
+  </header>
+
+  <div class="layout">
+
+    <aside class="sidebar">
+      <h2>Tasks</h2>
+      <div id="taskList"></div>
+
+      <div class="add-task-box">
+        <button id="showAddTask" class="add-task-btn" type="button">+ Add task</button>
+        <div id="addTaskForm" class="add-task-form">
+          <input type="text" id="newTaskName" placeholder="Task name" maxlength="60">
+          <div class="color-swatches" id="colorSwatches"></div>
+          <div class="form-actions">
+            <button id="confirmAddTask" class="io-btn" type="button">Add</button>
+            <button id="cancelAddTask" class="io-btn" type="button">Cancel</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="sidebar-note">
+        Drag a task card into any day. Drop it, tick it off, and jot a quick note about what you covered. Click <em>curriculum</em> on a task to track your place in the course itself, and use the ✎ / 🗑 icons to edit or remove tasks and sub-items.
+      </div>
+    </aside>
+
+    <main class="board">
+      <div class="board-head">
+        <div class="week-nav">
+          <button class="nav-btn" id="prevWeek">‹</button>
+          <span class="range" id="weekRange"></span>
+          <button class="nav-btn" id="nextWeek">›</button>
+          <button class="today-btn" id="todayBtn">Today</button>
+        </div>
+        <div class="io-group">
+          <button class="io-btn" id="exportBtn">Export backup</button>
+          <button class="io-btn" id="importBtn">Import backup</button>
+          <input type="file" id="importFile" accept="application/json">
+        </div>
+      </div>
+      <div class="week-grid" id="weekGrid"></div>
+    </main>
+
+  </div>
+
+  <footer class="hint">
+    Data is saved to this browser only (localStorage). Use "Export backup" occasionally so your streak survives clearing cache or switching devices — or set up GitHub sync above to keep every device in step automatically.
+  </footer>
+</div>
+
+<div id="syncOverlay" class="modal-overlay">
+  <div class="modal-panel">
+    <div class="modal-head">
+      <h3>Cloud sync via GitHub</h3>
+      <button id="closeSyncModal" class="icon-btn" type="button" title="Close">✕</button>
+    </div>
+    <p class="modal-desc">
+      Store your data as a JSON file in a GitHub repo so every laptop you open this page on stays in sync. Create a
+      <a href="https://github.com/settings/tokens?type=beta" target="_blank" rel="noopener">fine-grained personal access token</a>
+      scoped to just this one repo with "Contents: Read and write" permission. The token is saved only in this browser's local storage — never uploaded anywhere except directly to GitHub's API.
+    </p>
+
+    <label class="modal-label">Repository <span>owner/repo</span></label>
+    <input type="text" id="ghRepoInput" placeholder="yourname/habit-tracker-data">
+
+    <label class="modal-label">Branch</label>
+    <input type="text" id="ghBranchInput" placeholder="main">
+
+    <label class="modal-label">File path</label>
+    <input type="text" id="ghPathInput" placeholder="desklamp-data.json">
+
+    <label class="modal-label">Personal access token</label>
+    <input type="password" id="ghTokenInput" placeholder="github_pat_...">
+
+    <div class="modal-status" id="syncStatusLine">Not connected yet.</div>
+
+    <div class="modal-actions">
+      <button id="ghConnectBtn" class="io-btn" type="button">Save & connect</button>
+      <button id="ghPullBtn" class="io-btn" type="button">Pull latest</button>
+      <button id="ghPushBtn" class="io-btn" type="button">Push now</button>
+      <button id="ghDisconnectBtn" class="io-btn danger-btn" type="button">Disconnect</button>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  "use strict";
+
+  /* ---------------- default data ---------------- */
+  /* Curriculum shape: array of groups -> {id, title(optional), items:[{id,label,done}]}
+     For simple habits (Qur'an/Sport) there's a single untitled group.
+     For Python/DevOps, each group is a real section/day with real lecture or day titles. */
+
+  function makeGroup(id, title, items){
+    return {id, title, items: items.map((label, i)=>({id:id+"_"+i, label, done:false}))};
+  }
+
+  // ---- 100 Days of Python (Angela Yu) — every day title, verified against the published course syllabus ----
+  const PY_BEGINNER = [
+    "Day 01: Working with Variables in Python to Manage Data",
+    "Day 02: Understanding Data Types and How to Manipulate Strings",
+    "Day 03: Control Flow and Logical Operators",
+    "Day 04: Randomisation and Python Lists",
+    "Day 05: Python Loops",
+    "Day 06: Python Functions & Karel",
+    "Day 07: Hangman",
+    "Day 08: Function Parameters & Caesar Cipher",
+    "Day 09: Dictionaries, Nesting and the Secret Auction",
+    "Day 10: Function Return Values and the Calculator Project",
+    "Day 11: Blackjack Capstone Project",
+    "Day 12: Scope and Namespacing in Python",
+    "Day 13: Debugging: How to Find and Fix Errors in your Code",
+    "Day 14: Higher Lower Game Project"
+  ];
+  const PY_INTERMEDIATE = [
+    "Day 15: Local Development Environment Setup & the Coffee Machine Project",
+    "Day 16: Object Oriented Programming (OOP)",
+    "Day 17: The Quiz Project & the Benefits of OOP",
+    "Day 18: Turtle Graphics and GUIs",
+    "Day 19: Instances, State and Higher Order Functions",
+    "Day 20: Build the Snake Game Part 1: Animation & Coordinates",
+    "Day 21: Build the Snake Game Part 2: Inheritance & List Slicing",
+    "Day 22: Build Pong: The Famous Arcade Game",
+    "Day 23: The Turtle Crossing Capstone Project",
+    "Day 24: Files, Directories and Paths",
+    "Day 25: Working with CSV Data and the Pandas Library",
+    "Day 26: List Comprehension & the NATO Pilot's Alphabet",
+    "Day 27: Tkinter, *args, **kwargs and Creating GUI Programs",
+    "Day 28: Tkinter, Dynamic Typing and the Pomodoro GUI Application",
+    "Day 29: Building a Password Manager GUI App with Tkinter",
+    "Day 30: Errors, Exceptions and JSON Data: Improving the Password Manager",
+    "Day 31: Capstone Project - Flash Card App"
+  ];
+  const PY_INTERMEDIATE_PLUS = [
+    "Day 32: Send Email (smtplib) & Manage Dates (datetime): The Automated Birthday Wisher",
+    "Day 33: API Endpoints and API Parameters - ISS Overhead Notifier",
+    "Day 34: API Practice - Creating a GUI Quiz App",
+    "Day 35: Keys, Authentication & Environment Variables: Send SMS",
+    "Day 36: Stock Trading News Alert Project",
+    "Day 37: Habit Tracking Pixel Project",
+    "Day 38: Build a Workout Tracking App that Talks to Google Sheets!",
+    "Day 39: Capstone Part 1: Flight Deal Finder",
+    "Day 40: Capstone Part 2: Flight Club!",
+    "Day 41: Introduction to HTML",
+    "Day 42: Intermediate HTML",
+    "Day 43: Introduction to CSS",
+    "Day 44: Intermediate CSS",
+    "Day 45: Web Scraping with Beautiful Soup",
+    "Day 46: Create a Spotify Playlist using the Musical Time Machine",
+    "Day 47: Create an Automated Amazon Price Tracker",
+    "Day 48: Selenium Webdriver and Game Playing Bot",
+    "Day 49: Automating Job Applications on LinkedIn",
+    "Day 50: Automated Tinder Swiper",
+    "Day 51: Internet Speed Twitter Complaint Bot",
+    "Day 52: Instagram Follower Bot",
+    "Day 53: Automated Data Entry Job",
+    "Day 54: Introduction to Web Development with Flask",
+    "Day 55: HTML & URL Parsing in Flask and the Higher Lower Game",
+    "Day 56: Rendering HTML/Static Files and Name Card Project",
+    "Day 57: Templating with Jinja and Blog Project",
+    "Day 58: Bootstrap"
+  ];
+  const PY_ADVANCED = [
+    "Day 59: Upgraded Blog with Bootstrap",
+    "Day 60: HTML Forms with Flask",
+    "Day 61: Building Advanced Forms with WTForms",
+    "Day 62: Flask, WTForms, Bootstrap and CSV - Coffee & Wifi Project",
+    "Day 63: Databases with SQLite and SQLAlchemy",
+    "Day 64: My Top 10 Movies Website",
+    "Day 65: Web Design School - How to Create a Website that People will Love",
+    "Day 66: Building Your Own API with RESTful Routing",
+    "Day 67: Blog Capstone Project Part 3 - RESTful Routing",
+    "Day 68: Authentication with Flask",
+    "Day 69: Blog Capstone Project Part 4 - Adding Users",
+    "Day 70: Deploying Your Web Application with Heroku",
+    "Day 71: Data Exploration with Pandas: College Major",
+    "Day 72: Data Visualisation with Matplotlib: Programming Languages",
+    "Day 73: Aggregate & Merge Data with Pandas: Analyse the LEGO Dataset",
+    "Day 74: Google Trends Data: Resampling and Visualising Time Series",
+    "Day 75: Beautiful Plotly Charts & Analysing the Android App Store",
+    "Day 76: Computation with NumPy and N-Dimensional Arrays",
+    "Day 77: Linear Regression and Data Visualisation with Seaborn",
+    "Day 78: Analysing the Nobel Prize with Plotly, Matplotlib & Seaborn",
+    "Day 79: The Tragic Discovery of Handwashing: t-Tests & Distributions",
+    "Day 80: Capstone Project - Predict House Prices"
+  ];
+  const PY_PROFESSIONAL = [
+    "Day 81: Portfolio Project - Text to Morse Code Converter",
+    "Day 82: Portfolio Project - A Website to Show Off Your Skills",
+    "Day 83: Portfolio Project - Text-Based Tic Tac Toe Game",
+    "Day 84: Portfolio Project - Upload Images and Add a Watermark",
+    "Day 85: Portfolio Project - Tkinter Typing Speed Tester",
+    "Day 86: Portfolio Project - Breakout Game Clone with Turtle",
+    "Day 87: Portfolio Project - Cafe & Wifi Website for Remote Working",
+    "Day 88: Portfolio Project - Todo List Website with Flask",
+    "Day 89: Portfolio Project - Disappearing Text Writing App",
+    "Day 90: Portfolio Project - Convert PDF to Audiobook",
+    "Day 91: Portfolio Project - Image Colour Palette Generator",
+    "Day 92: Portfolio Project - Custom Web Scraper to Collect Data",
+    "Day 93: Portfolio Project - Automate the Google Dinosaur Game",
+    "Day 94: Portfolio Project - Space Invaders",
+    "Day 95: Portfolio Project - Custom Website Using an API",
+    "Day 96: Portfolio Project - eCommerce Website with Payment Processing",
+    "Day 97: Portfolio Project - Send a WhatsApp Message with Python",
+    "Day 98: Portfolio Project - Analyse & Visualise the Space Race",
+    "Day 99: Portfolio Project - Analysing Deaths Involving Police in the US",
+    "Day 100: Portfolio Project - Predicting Earnings with Multivariable Regression"
+  ];
+
+  // ---- Decoding DevOps (Imran Teli) — first ~10 sections list REAL lecture titles as they
+  // appear in Udemy's course-content listing; later sections list the named topics from the
+  // official published syllabus (each may bundle more than one video). ----
+  const DEVOPS_GROUPS = [
+    ["Introduction", ["Introduction","What is DevOps?","What is Continuous Integration?","What is Continuous Delivery?"]],
+    ["Prerequisites Info & Setup", ["Tools Prerequisite Information","Chocolatey for Windows","Homebrew for MacOS","Installing Softwares","Tools Prerequisites for CentOS 9, RHEL 9 & Rocky Linux","Tools Prerequisites for Ubuntu 24","Signups","AWS Setup"]],
+    ["VM Setup", ["Welcome to Virtualization","What is Virtualization","Introduction","VM - Manually (Windows & macOS Intel chip)","VM - Automatically (Windows & macOS Intel chip)","VM on macOS M1 chip","Vagrant & VirtualBox"]],
+    ["Linux", ["Introduction to Linux","Commands and File Systems","More Commands (mkdir, cp, mv, touch etc.)","Vim Editor","File Types","Filters","Redirections","Users and Groups","File Permissions","Sudo","Package Management","Services","Processes","Archiving","Ubuntu Commands"]],
+    ["Git", ["Introduction","Versioning","Branches & More","Rollback","Git SSH Login","Git Tags, Semantic Versioning & More","Setup GitHub Copilot"]],
+    ["Vagrant & Linux Servers", ["Vagrant VMs","Vagrant IP, RAM & CPU","Vagrant Sync Directories","Provisioning","Website Setup","WordPress Setup","Automate Website Setup","Automate WordPress Setup","Copilot AI for Coding","Multi-VM Vagrantfile","Systemctl & Tomcat 10"]],
+    ["Variables, JSON & YAML", ["Introduction","Variables & Python Data Structures","JSON & YAML"]],
+    ["VProfile Project Setup (Manual & Automated)", ["Welcome to the Project","Introduction","VM Setup","MySQL Setup","Memcache Setup","RabbitMQ Setup","App Setup","Nginx Setup","Validate the Deployment","Automated - Introduction","Automated - Code","Automated - Execution"]],
+    ["Networking", ["OSI Model","Understanding Networks & IP","Protocols, Ports etc.","Networking Commands"]],
+    ["Introducing Containers", ["What are Containers","What is Docker","Hands-on Docker Containers","VProfile Project on Containers","Microservices","Microservice Project"]],
+    ["AI-Assisted Automation Layer", ["GitHub Copilot for Scripting & Automation","AI-Assisted Development Workflows","Amazon Q for Cloud Automation","AI-Integrated Helm Workflows"]],
+    ["AWS Cloud Fundamentals", ["Cloud Computing Concepts","IAM","EC2","EBS","ELB","SSM","CloudShell","AWS CLI","S3","CloudWatch","RDS","Auto Scaling","Route 53"]],
+    ["Project: Lift & Shift Application to AWS", ["Application Migration to AWS","Cloud Architecture Best Practices"]],
+    ["Project: Re-Architecting Applications on AWS", ["PaaS-Based Architecture","SaaS-Based Architecture","Cloud-Native Design Principles"]],
+    ["Source Control & Build Automation", ["Git","GitHub","Maven"]],
+    ["Jenkins", ["CI/CD Pipelines","Master/Agent Architecture","Nexus Integration","SonarQube Integration","Automated Build & Deployment Workflows"]],
+    ["GitHub Actions", ["Workflow Automation","Self-Hosted Runners","Security Scanning","CI/CD Pipelines"]],
+    ["GitLab CI/CD", ["Pipelines","Stages","Docker Integration","Automated Deployments"]],
+    ["Python Automation Layer", ["Python Fundamentals for DevOps","OS Automation","AWS Automation with Python","Amazon Q Assisted Development"]],
+    ["Terraform", ["Terraform Fundamentals","Variables","Modules","Remote State & Backends","Infrastructure as Code Best Practices"]],
+    ["Terraform Project", ["AWS VPC Automation using Terraform"]],
+    ["Monitoring & Observability", ["Monitoring Fundamentals","Observability Fundamentals","Why Monitoring Matters in Production","Prometheus Setup & Configuration","Grafana Setup & Dashboarding","Loki for Centralized Logging","Alloy for Metrics & Logs Collection","PromQL Fundamentals","Dashboard Design Best Practices","Alerting & Notification Strategies","Slack Integrations","Centralized Logging Workflows","Production Monitoring Practices"]],
+    ["Ansible", ["Ad Hoc Commands","Modules","YAML Fundamentals","Playbooks","Variables","Conditions","Loops","Templates","Handlers","Roles"]],
+    ["AWS Automation with Ansible", ["Cloud Provisioning","Configuration Management","Deployment Automation"]],
+    ["Advanced AWS DevOps Layer", ["VPC Deep Dive","AWS Lambda","Cloud Logging","Custom Metrics","Monitoring & Automation"]],
+    ["Project: CI/CD on AWS", ["Elastic Beanstalk","RDS","CodePipeline","Automated Deployments","Production CI/CD Workflows"]],
+    ["Multi-Tier Application Deployment on GCP", ["Cloud Shell","VPC","Firewall Rules","Virtual Machines","Cloud SQL","Memorystore","Cloud DNS","Managed Instance Groups","HTTPS Load Balancers","Certificate Manager","Production-Grade Cloud Architecture"]],
+    ["Docker (deep dive)", ["Containers","Images","Dockerfiles","Volumes","Networks","Container Best Practices"]],
+    ["Kubernetes", ["Kubernetes Architecture","Cluster Setup","Pods","Deployments","Services","ConfigMaps","Secrets","Ingress","Autoscaling","Application Deployments","Production Workloads"]],
+    ["Helm & Kubernetes Tooling", ["Helm Fundamentals","Helm Charts","AI-Assisted Helm Development","Lens Kubernetes IDE"]],
+    ["Project: VProfile Deployment on Kubernetes", ["Containerization","Kubernetes Deployment","Service Exposure","Scaling","Production Deployment Practices"]],
+    ["End-to-End GitOps Project", ["GitHub Actions CI Pipeline","Automated Docker Image Builds","Container Registry Integration","Helm-Based Deployments","Kubernetes Application Delivery","ArgoCD Installation & Configuration","GitOps Workflow Implementation","Git as the Single Source of Truth","Automated Application Updates","Continuous Deployment with ArgoCD","Production-Style Release Management","Modern Cloud-Native Delivery Practices"]]
+  ];
+
+  const DEFAULT_TASKS = [
+    {
+      id:"quran", name:"Qur'an", color:"var(--c-quran)",
+      curricNote:"A personal practice rather than a course — a simple daily rotation to keep it consistent.",
+      curriculum:[ makeGroup("q", null, [
+        "Read today's portion (wird)","Tajweed practice","Memorisation (hifz) review",
+        "Revision (muraja'ah) of older portions","Tafsir / reflect on meaning","Listen to a qari's recitation"
+      ])]
+    },
+    {
+      id:"sport", name:"Sport", color:"var(--c-sport)",
+      curricNote:"General training checklist — rotate depending on your split.",
+      curriculum:[ makeGroup("s", null, [
+        "Warm-up (5–10 min)","Strength / resistance training","Cardio session",
+        "Mobility & stretching","Planned rest / active recovery day"
+      ])]
+    },
+    {
+      id:"ccna", name:"CCNA video (Sajad)", color:"var(--c-ccna)",
+      curricNote:"Couldn't verify the exact channel/video numbering behind \"Sajad CCNA 220\", so this checklist follows the official Cisco CCNA 200-301 exam blueprint domains instead — use it to tag which domain your current video covers.",
+      curriculum:[ makeGroup("c", null, [
+        "1.0 Network Fundamentals",
+        "2.0 Network Access (switching, VLANs, trunking, EtherChannel)",
+        "3.0 IP Connectivity (routing, OSPF)",
+        "4.0 IP Services (NAT, NTP, DHCP, QoS)",
+        "5.0 Security Fundamentals (ACLs, VPNs, wireless security)",
+        "6.0 Automation & Programmability (APIs, Ansible, JSON)"
+      ])]
+    },
+    {
+      id:"devops", name:"Decoding DevOps (Imran Teli)", color:"var(--c-devops)",
+      curricNote:"Sections 1–10 (Introduction → Introducing Containers) list the real lecture titles from Udemy's course-content listing. The remaining sections list the named topics from the official course description — Udemy truncates the full lecture list, and each of these topics can span one or more videos.",
+      curriculum: DEVOPS_GROUPS.map(([title, items], i)=> makeGroup("d"+i, title, items))
+    },
+    {
+      id:"python", name:"100 Days of Python (Angela Yu)", color:"var(--c-python)",
+      curricNote:"All 100 days, with real day titles from the published course syllabus, grouped the way the course itself groups them (Beginner → Professional).",
+      curriculum:[
+        makeGroup("py_beg", "👨🏻‍🎓 Beginner (Days 1–14)", PY_BEGINNER),
+        makeGroup("py_int", "🏋🏻‍♂️ Intermediate (Days 15–31)", PY_INTERMEDIATE),
+        makeGroup("py_intp", "💪 Intermediate+ (Days 32–58)", PY_INTERMEDIATE_PLUS),
+        makeGroup("py_adv", "🚀 Advanced (Days 59–80)", PY_ADVANCED),
+        makeGroup("py_pro", "👨‍💻 Professional (Days 81–100)", PY_PROFESSIONAL)
+      ]
+    }
+  ];
+
+  const STORAGE_KEY = "deskLampState_v2";
+
+  function loadState(){
+    try{
+      const raw = localStorage.getItem(STORAGE_KEY);
+      if(raw){
+        const parsed = JSON.parse(raw);
+        if(parsed && parsed.tasks && parsed.entries) return parsed;
+      }
+    }catch(e){}
+    return {tasks: JSON.parse(JSON.stringify(DEFAULT_TASKS)), entries:{}};
+  }
+
+  let state = loadState();
+
+  function saveState(sync){
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+    if(sync !== false) scheduleGithubPush();
+  }
+
+  function uid(){
+    return Math.random().toString(36).slice(2,10);
+  }
+
+  function dateKey(d){
+    return d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0");
+  }
+
+  function startOfWeek(d){
+    const copy = new Date(d);
+    const day = (copy.getDay()+6)%7; // Monday=0
+    copy.setDate(copy.getDate()-day);
+    copy.setHours(0,0,0,0);
+    return copy;
+  }
+
+  let viewWeekStart = startOfWeek(new Date());
+  const today = new Date(); today.setHours(0,0,0,0);
+
+  /* ---------------- render: sidebar tasks ---------------- */
+  const taskListEl = document.getElementById("taskList");
+
+  const PALETTE = ["#4fb0a6","#d1596b","#5b8ef0","#a084e8","#9bc158","#e2a84f","#e07a5f","#3da5d9","#f2b134","#7c9885","#c77dff","#5aa9a3"];
+  const openCurricula = new Set();      // task ids whose curriculum panel is expanded
+  const openAddItemRows = new Set();    // "taskId::groupId" rows whose add-item input is open
+  const openAddGroupRows = new Set();   // task ids whose add-group input is open
+
+  function allItems(task){
+    return task.curriculum.flatMap(g=>g.items);
+  }
+
+  function taskProgress(task){
+    const items = allItems(task);
+    const total = items.length;
+    const done = items.filter(c=>c.done).length;
+    return {done, total, pct: total? Math.round(done/total*100) : 0};
+  }
+
+  function findGroup(task, groupId){
+    return task.curriculum.find(g=>g.id===groupId);
+  }
+
+  /* ---- task CRUD ---- */
+  function addTask(name, color){
+    state.tasks.push({
+      id:"t_"+uid(), name, color,
+      curricNote:"Add sections and items below to build out a curriculum for this task.",
+      curriculum:[]
+    });
+    saveState();
+    renderAll();
+  }
+
+  function renameTask(taskId, newName){
+    const task = taskById(taskId);
+    if(task && newName.trim()) task.name = newName.trim();
+    saveState();
+    renderTasks();
+  }
+
+  function deleteTask(taskId){
+    const task = taskById(taskId);
+    if(!task) return;
+    if(!confirm(`Delete "${task.name}"? This also removes it from every day it's been logged on.`)) return;
+    state.tasks = state.tasks.filter(t=>t.id!==taskId);
+    Object.keys(state.entries).forEach(key=>{
+      state.entries[key] = state.entries[key].filter(e=>e.taskId!==taskId);
+    });
+    openCurricula.delete(taskId);
+    saveState();
+    renderAll();
+  }
+
+  /* ---- group CRUD ---- */
+  function addGroup(taskId, title){
+    const task = taskById(taskId);
+    if(!task || !title.trim()) return;
+    task.curriculum.push({id:"g_"+uid(), title:title.trim(), items:[]});
+    saveState();
+    renderTasks();
+  }
+
+  function renameGroup(taskId, groupId, newTitle){
+    const task = taskById(taskId);
+    const group = task && findGroup(task, groupId);
+    if(group) group.title = newTitle.trim() || group.title;
+    saveState();
+    renderTasks();
+  }
+
+  function deleteGroup(taskId, groupId){
+    const task = taskById(taskId);
+    if(!task) return;
+    if(!confirm("Delete this section and all its items?")) return;
+    task.curriculum = task.curriculum.filter(g=>g.id!==groupId);
+    saveState();
+    renderTasks();
+  }
+
+  /* ---- item CRUD ---- */
+  function addItem(taskId, groupId, label){
+    const task = taskById(taskId);
+    const group = task && findGroup(task, groupId);
+    if(!group || !label.trim()) return;
+    group.items.push({id:"i_"+uid(), label:label.trim(), done:false});
+    saveState();
+    renderTasks();
+  }
+
+  function editItem(taskId, groupId, itemId, newLabel){
+    const task = taskById(taskId);
+    const group = task && findGroup(task, groupId);
+    const item = group && group.items.find(i=>i.id===itemId);
+    if(item && newLabel.trim()) item.label = newLabel.trim();
+    saveState();
+    renderTasks();
+    renderStats();
+  }
+
+  function deleteItem(taskId, groupId, itemId){
+    const task = taskById(taskId);
+    const group = task && findGroup(task, groupId);
+    if(!group) return;
+    group.items = group.items.filter(i=>i.id!==itemId);
+    saveState();
+    renderTasks();
+    renderStats();
+  }
+
+  function renderTasks(){
+    taskListEl.innerHTML = "";
+    state.tasks.forEach(task=>{
+      const prog = taskProgress(task);
+      const isOpen = openCurricula.has(task.id);
+      const card = document.createElement("div");
+      card.className = "task-card";
+      card.style.setProperty("--task-color", task.color);
+      card.draggable = true;
+      card.dataset.taskId = task.id;
+
+      const groupsHtml = task.curriculum.map(g=>{
+        const addItemKey = task.id+"::"+g.id;
+        const itemsHtml = g.items.map(it=>`
+          <label class="curric-item ${it.done?'done':''}" data-cid="${it.id}" data-gid="${g.id}">
+            <input type="checkbox" ${it.done?'checked':''}>
+            <span>${it.label}</span>
+            <span class="item-actions">
+              <button type="button" class="icon-btn edit-item" title="Edit">✎</button>
+              <button type="button" class="icon-btn danger del-item" title="Delete">🗑</button>
+            </span>
+          </label>`).join("");
+        return `
+          <div class="curric-group" data-gid="${g.id}">
+            ${g.title ? `
+              <div class="curric-group-header">
+                <span class="curric-group-title">${g.title}</span>
+                <span class="card-actions">
+                  <button type="button" class="icon-btn edit-group" title="Rename section">✎</button>
+                  <button type="button" class="icon-btn danger del-group" title="Delete section">🗑</button>
+                </span>
+              </div>` : ``}
+            ${itemsHtml}
+            <div class="add-item-row">
+              <button type="button" class="add-link show-add-item">+ add item</button>
+              <input type="text" class="add-item-input ${openAddItemRows.has(addItemKey)?'open':''}" placeholder="New item label — press Enter">
+            </div>
+          </div>`;
+      }).join("");
+
+      card.innerHTML = `
+        <div class="row1">
+          <span class="name">${task.name}</span>
+          <span class="card-actions">
+            <button type="button" class="icon-btn edit-task" title="Rename task">✎</button>
+            <button type="button" class="icon-btn danger del-task" title="Delete task">🗑</button>
+          </span>
+        </div>
+        <div class="meta">
+          <div class="progress-track"><div class="progress-fill" style="width:${prog.pct}%"></div></div>
+          <span>${prog.done}/${prog.total}</span>
+        </div>
+        <button class="toggle-curric" type="button">curriculum ${isOpen?'▴':'▾'}</button>
+        <div class="curriculum ${isOpen?'open':''}">
+          ${task.curricNote ? `<p class="curric-note">${task.curricNote}</p>` : ``}
+          ${groupsHtml}
+          <div class="add-group-row">
+            <button type="button" class="add-link show-add-group">+ add section</button>
+            <input type="text" class="add-group-input ${openAddGroupRows.has(task.id)?'open':''}" placeholder="New section title — press Enter">
+          </div>
+        </div>
+      `;
+
+      card.addEventListener("dragstart", e=>{
+        e.dataTransfer.setData("text/plain", task.id);
+        card.classList.add("dragging");
+      });
+      card.addEventListener("dragend", ()=> card.classList.remove("dragging"));
+
+      const toggleBtn = card.querySelector(".toggle-curric");
+      const curricEl = card.querySelector(".curriculum");
+      toggleBtn.addEventListener("click", ()=>{
+        curricEl.classList.toggle("open");
+        const nowOpen = curricEl.classList.contains("open");
+        toggleBtn.textContent = "curriculum " + (nowOpen ? "▴" : "▾");
+        if(nowOpen) openCurricula.add(task.id); else openCurricula.delete(task.id);
+      });
+
+      // item checkbox toggle
+      curricEl.querySelectorAll(".curric-item").forEach(itemEl=>{
+        itemEl.querySelector('input[type=checkbox]').addEventListener("change", e=>{
+          const gid = itemEl.dataset.gid, cid = itemEl.dataset.cid;
+          const group = findGroup(task, gid);
+          const item = group.items.find(i=>i.id===cid);
+          item.done = e.target.checked;
+          saveState();
+          renderTasks();
+          renderStats();
+        });
+
+        itemEl.querySelector(".edit-item").addEventListener("click", e=>{
+          e.preventDefault();
+          const gid = itemEl.dataset.gid, cid = itemEl.dataset.cid;
+          const group = findGroup(task, gid);
+          const item = group.items.find(i=>i.id===cid);
+          const span = itemEl.querySelector("span:not(.item-actions)");
+          const input = document.createElement("input");
+          input.type = "text";
+          input.className = "inline-edit";
+          input.value = item.label;
+          span.replaceWith(input);
+          input.focus();
+          input.select();
+          const commit = ()=> editItem(task.id, gid, cid, input.value);
+          input.addEventListener("keydown", ev=>{ if(ev.key==="Enter"){ ev.preventDefault(); commit(); } });
+          input.addEventListener("blur", commit);
+        });
+
+        itemEl.querySelector(".del-item").addEventListener("click", e=>{
+          e.preventDefault();
+          const gid = itemEl.dataset.gid, cid = itemEl.dataset.cid;
+          deleteItem(task.id, gid, cid);
+        });
+      });
+
+      // rename / delete task
+      card.querySelector(".edit-task").addEventListener("click", e=>{
+        e.stopPropagation();
+        const nameSpan = card.querySelector(".row1 .name");
+        const input = document.createElement("input");
+        input.type = "text";
+        input.className = "inline-edit";
+        input.value = task.name;
+        nameSpan.replaceWith(input);
+        input.focus();
+        input.select();
+        const commit = ()=> renameTask(task.id, input.value);
+        input.addEventListener("keydown", ev=>{ if(ev.key==="Enter"){ ev.preventDefault(); commit(); } });
+        input.addEventListener("blur", commit);
+      });
+      card.querySelector(".del-task").addEventListener("click", e=>{
+        e.stopPropagation();
+        deleteTask(task.id);
+      });
+
+      // group rename/delete + add-item + add-group
+      card.querySelectorAll(".curric-group").forEach(groupEl=>{
+        const gid = groupEl.dataset.gid;
+        const editGroupBtn = groupEl.querySelector(".edit-group");
+        const delGroupBtn = groupEl.querySelector(".del-group");
+        if(editGroupBtn) editGroupBtn.addEventListener("click", ()=>{
+          const titleSpan = groupEl.querySelector(".curric-group-title");
+          const input = document.createElement("input");
+          input.type = "text";
+          input.className = "inline-edit";
+          input.value = titleSpan.textContent;
+          titleSpan.replaceWith(input);
+          input.focus();
+          input.select();
+          const commit = ()=> renameGroup(task.id, gid, input.value);
+          input.addEventListener("keydown", ev=>{ if(ev.key==="Enter"){ ev.preventDefault(); commit(); } });
+          input.addEventListener("blur", commit);
+        });
+        if(delGroupBtn) delGroupBtn.addEventListener("click", ()=> deleteGroup(task.id, gid));
+
+        const showAddItemBtn = groupEl.querySelector(".show-add-item");
+        const addItemInput = groupEl.querySelector(".add-item-input");
+        showAddItemBtn.addEventListener("click", ()=>{
+          openAddItemRows.add(task.id+"::"+gid);
+          addItemInput.classList.add("open");
+          addItemInput.focus();
+        });
+        addItemInput.addEventListener("keydown", ev=>{
+          if(ev.key==="Enter"){
+            ev.preventDefault();
+            if(addItemInput.value.trim()){
+              addItem(task.id, gid, addItemInput.value);
+              openAddItemRows.delete(task.id+"::"+gid);
+            }
+          }
+        });
+        addItemInput.addEventListener("blur", ()=>{
+          if(!addItemInput.value.trim()) openAddItemRows.delete(task.id+"::"+gid);
+        });
+      });
+
+      const showAddGroupBtn = card.querySelector(".show-add-group");
+      const addGroupInput = card.querySelector(".add-group-input");
+      showAddGroupBtn.addEventListener("click", ()=>{
+        openAddGroupRows.add(task.id);
+        addGroupInput.classList.add("open");
+        addGroupInput.focus();
+      });
+      addGroupInput.addEventListener("keydown", ev=>{
+        if(ev.key==="Enter"){
+          ev.preventDefault();
+          if(addGroupInput.value.trim()){
+            addGroup(task.id, addGroupInput.value);
+            openAddGroupRows.delete(task.id);
+          }
+        }
+      });
+      addGroupInput.addEventListener("blur", ()=>{
+        if(!addGroupInput.value.trim()) openAddGroupRows.delete(task.id);
+      });
+
+      taskListEl.appendChild(card);
+    });
+  }
+
+  /* ---------------- render: week board ---------------- */
+  const weekGridEl = document.getElementById("weekGrid");
+  const weekRangeEl = document.getElementById("weekRange");
+
+  const DOW = ["Mon","Tue","Wed","Thu","Fri","Sat","Sun"];
+  const MONTHS = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+
+  function renderWeekRange(){
+    const end = new Date(viewWeekStart);
+    end.setDate(end.getDate()+6);
+    weekRangeEl.textContent = `${viewWeekStart.getDate()} ${MONTHS[viewWeekStart.getMonth()]} – ${end.getDate()} ${MONTHS[end.getMonth()]} ${end.getFullYear()}`;
+  }
+
+  function taskById(id){ return state.tasks.find(t=>t.id===id); }
+
+  function renderWeekGrid(){
+    weekGridEl.innerHTML = "";
+    for(let i=0;i<7;i++){
+      const d = new Date(viewWeekStart);
+      d.setDate(d.getDate()+i);
+      const key = dateKey(d);
+      const isToday = d.getTime()===today.getTime();
+      const dayEntries = state.entries[key] || [];
+
+      const col = document.createElement("div");
+      col.className = "day-col" + (isToday?" today":"");
+      if(dayEntries.length && dayEntries.every(e=>e.done)) col.classList.add("all-done");
+      col.dataset.dateKey = key;
+
+      col.innerHTML = `
+        <div class="day-head">
+          <div class="dow">${DOW[i]}</div>
+          <div class="dnum">${d.getDate()}</div>
+        </div>
+        <div class="day-body"></div>
+      `;
+
+      const body = col.querySelector(".day-body");
+      dayEntries.forEach(entry=> body.appendChild(renderEntry(key, entry)));
+
+      col.addEventListener("dragover", e=>{ e.preventDefault(); col.classList.add("dragover"); });
+      col.addEventListener("dragleave", ()=> col.classList.remove("dragover"));
+      col.addEventListener("drop", e=>{
+        e.preventDefault();
+        col.classList.remove("dragover");
+        const taskId = e.dataTransfer.getData("text/plain");
+        if(!taskId) return;
+        if(!state.entries[key]) state.entries[key] = [];
+        state.entries[key].push({id:uid(), taskId, note:"", done:false});
+        saveState();
+        renderWeekGrid();
+        renderStats();
+      });
+
+      weekGridEl.appendChild(col);
+    }
+  }
+
+  function renderEntry(dayKey, entry){
+    const task = taskById(entry.taskId);
+    const wrap = document.createElement("div");
+    wrap.className = "entry" + (entry.done ? " done":"");
+    wrap.style.setProperty("--entry-color", task ? task.color : "var(--amber)");
+
+    wrap.innerHTML = `
+      <div class="erow">
+        <label class="ename">
+          <input type="checkbox" ${entry.done?'checked':''}>
+          <span>${task ? task.name : "Unknown task"}</span>
+        </label>
+        <button class="del" title="Remove">✕</button>
+      </div>
+      <textarea placeholder="What did you cover / how did it go?">${entry.note||""}</textarea>
+    `;
+
+    wrap.querySelector('input[type=checkbox]').addEventListener("change", e=>{
+      entry.done = e.target.checked;
+      saveState();
+      renderWeekGrid();
+      renderStats();
+    });
+
+    wrap.querySelector(".del").addEventListener("click", ()=>{
+      state.entries[dayKey] = state.entries[dayKey].filter(en=>en.id!==entry.id);
+      saveState();
+      renderWeekGrid();
+      renderStats();
+    });
+
+    let saveTimer;
+    wrap.querySelector("textarea").addEventListener("input", e=>{
+      entry.note = e.target.value;
+      clearTimeout(saveTimer);
+      saveTimer = setTimeout(saveState, 300);
+    });
+
+    return wrap;
+  }
+
+  /* ---------------- stats ---------------- */
+  const statsBarEl = document.getElementById("statsBar");
+
+  function computeStreak(){
+    let streak = 0;
+    let cursor = new Date(today);
+    while(true){
+      const key = dateKey(cursor);
+      const entries = state.entries[key] || [];
+      const hasDone = entries.some(e=>e.done);
+      if(hasDone){
+        streak++;
+        cursor.setDate(cursor.getDate()-1);
+      } else {
+        break;
+      }
+    }
+    return streak;
+  }
+
+  function computeTodayPct(){
+    const key = dateKey(today);
+    const entries = state.entries[key] || [];
+    if(!entries.length) return 0;
+    const done = entries.filter(e=>e.done).length;
+    return Math.round(done/entries.length*100);
+  }
+
+  function computeTotalLogged(){
+    let total = 0;
+    Object.values(state.entries).forEach(arr=> total += arr.length);
+    return total;
+  }
+
+  function renderStats(){
+    const streak = computeStreak();
+    const todayPct = computeTodayPct();
+    const total = computeTotalLogged();
+    statsBarEl.innerHTML = `
+      <div class="stat"><span class="num">${streak}</span><span class="label">day streak</span></div>
+      <div class="stat"><span class="num">${todayPct}%</span><span class="label">today done</span></div>
+      <div class="stat"><span class="num">${total}</span><span class="label">tasks logged</span></div>
+    `;
+  }
+
+  /* ---------------- add task form ---------------- */
+  const showAddTaskBtn = document.getElementById("showAddTask");
+  const addTaskForm = document.getElementById("addTaskForm");
+  const newTaskNameInput = document.getElementById("newTaskName");
+  const colorSwatchesEl = document.getElementById("colorSwatches");
+  let selectedColor = PALETTE[0];
+
+  function renderSwatches(){
+    colorSwatchesEl.innerHTML = PALETTE.map(c=>
+      `<span class="swatch ${c===selectedColor?'selected':''}" style="background:${c}" data-color="${c}"></span>`
+    ).join("");
+    colorSwatchesEl.querySelectorAll(".swatch").forEach(sw=>{
+      sw.addEventListener("click", ()=>{
+        selectedColor = sw.dataset.color;
+        renderSwatches();
+      });
+    });
+  }
+  renderSwatches();
+
+  function openAddTaskForm(){
+    addTaskForm.classList.add("open");
+    showAddTaskBtn.style.display = "none";
+    newTaskNameInput.value = "";
+    selectedColor = PALETTE[state.tasks.length % PALETTE.length];
+    renderSwatches();
+    newTaskNameInput.focus();
+  }
+  function closeAddTaskForm(){
+    addTaskForm.classList.remove("open");
+    showAddTaskBtn.style.display = "block";
+  }
+
+  showAddTaskBtn.addEventListener("click", openAddTaskForm);
+  document.getElementById("cancelAddTask").addEventListener("click", closeAddTaskForm);
+  document.getElementById("confirmAddTask").addEventListener("click", ()=>{
+    const name = newTaskNameInput.value.trim();
+    if(!name){ newTaskNameInput.focus(); return; }
+    addTask(name, selectedColor);
+    closeAddTaskForm();
+  });
+  newTaskNameInput.addEventListener("keydown", e=>{
+    if(e.key==="Enter"){ e.preventDefault(); document.getElementById("confirmAddTask").click(); }
+  });
+
+  /* ---------------- nav & io ---------------- */
+  document.getElementById("prevWeek").addEventListener("click", ()=>{
+    viewWeekStart.setDate(viewWeekStart.getDate()-7);
+    renderAll();
+  });
+  document.getElementById("nextWeek").addEventListener("click", ()=>{
+    viewWeekStart.setDate(viewWeekStart.getDate()+7);
+    renderAll();
+  });
+  document.getElementById("todayBtn").addEventListener("click", ()=>{
+    viewWeekStart = startOfWeek(new Date());
+    renderAll();
+  });
+
+  document.getElementById("exportBtn").addEventListener("click", ()=>{
+    const blob = new Blob([JSON.stringify(state,null,2)], {type:"application/json"});
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = `desk-lamp-backup-${dateKey(new Date())}.json`;
+    a.click();
+    URL.revokeObjectURL(url);
+  });
+
+  const importInput = document.getElementById("importFile");
+  document.getElementById("importBtn").addEventListener("click", ()=> importInput.click());
+  importInput.addEventListener("change", e=>{
+    const file = e.target.files[0];
+    if(!file) return;
+    const reader = new FileReader();
+    reader.onload = evt=>{
+      try{
+        const parsed = JSON.parse(evt.target.result);
+        if(parsed && parsed.tasks && parsed.entries){
+          state = parsed;
+          saveState();
+          renderAll();
+        } else {
+          alert("That file doesn't look like a Desk Lamp backup.");
+        }
+      }catch(err){
+        alert("Couldn't read that file.");
+      }
+    };
+    reader.readAsText(file);
+    importInput.value = "";
+  });
+
+  /* ---------------- GitHub sync ---------------- */
+  const GH_CONFIG_KEY = "deskLampGhConfig_v1";
+
+  function loadGhConfig(){
+    try{
+      const raw = localStorage.getItem(GH_CONFIG_KEY);
+      return raw ? JSON.parse(raw) : null;
+    }catch(e){ return null; }
+  }
+  function saveGhConfig(cfg){ localStorage.setItem(GH_CONFIG_KEY, JSON.stringify(cfg)); }
+  function clearGhConfig(){ localStorage.removeItem(GH_CONFIG_KEY); }
+
+  let ghConfig = loadGhConfig();
+  let ghPushTimer = null;
+
+  function utf8ToBase64(str){ return btoa(unescape(encodeURIComponent(str))); }
+  function base64ToUtf8(str){ return decodeURIComponent(escape(atob(str.replace(/\n/g,"")))); }
+
+  function ghApiUrl(cfg){
+    return `https://api.github.com/repos/${cfg.owner}/${cfg.repo}/contents/${encodeURIComponent(cfg.path)}`;
+  }
+
+  async function ghFetchRemote(cfg){
+    const res = await fetch(`${ghApiUrl(cfg)}?ref=${encodeURIComponent(cfg.branch)}&t=${Date.now()}`, {
+      headers: { "Authorization": `token ${cfg.token}`, "Accept": "application/vnd.github+json" }
+    });
+    if(res.status === 404) return null;
+    if(!res.ok) throw new Error(`GitHub read failed (${res.status})`);
+    const json = await res.json();
+    return { sha: json.sha, data: JSON.parse(base64ToUtf8(json.content)) };
+  }
+
+  async function ghPushState(cfg){
+    let sha = null;
+    try{
+      const remote = await ghFetchRemote(cfg);
+      if(remote) sha = remote.sha;
+    }catch(e){ /* file may not exist yet — proceed to create it */ }
+
+    const body = {
+      message: `Desk Lamp sync — ${new Date().toISOString()}`,
+      content: utf8ToBase64(JSON.stringify(state, null, 2)),
+      branch: cfg.branch
+    };
+    if(sha) body.sha = sha;
+
+    const res = await fetch(ghApiUrl(cfg), {
+      method:"PUT",
+      headers:{
+        "Authorization": `token ${cfg.token}`,
+        "Accept":"application/vnd.github+json",
+        "Content-Type":"application/json"
+      },
+      body: JSON.stringify(body)
+    });
+    if(!res.ok){
+      const errBody = await res.text();
+      throw new Error(`GitHub write failed (${res.status})`);
+    }
+  }
+
+  function fmtTime(){
+    return new Date().toLocaleTimeString([], {hour:"2-digit", minute:"2-digit"});
+  }
+
+  function setSyncStatus(status, detail){
+    const dot = document.getElementById("syncDot");
+    const line = document.getElementById("syncStatusLine");
+    dot.className = "sync-dot" + (status ? " "+status : "");
+    if(!ghConfig){
+      dot.title = "Not connected";
+      if(line) line.textContent = "Not connected yet.";
+      return;
+    }
+    const repoLabel = `${ghConfig.owner}/${ghConfig.repo} (${ghConfig.path})`;
+    let msg;
+    if(status==="pending") msg = `Change pending — will push to ${repoLabel} shortly…`;
+    else if(status==="syncing") msg = `Syncing with ${repoLabel}…`;
+    else if(status==="synced") msg = `Synced with ${repoLabel} at ${fmtTime()}.`;
+    else if(status==="error") msg = `Sync error with ${repoLabel}${detail? ": "+detail : ""}. Will retry on next change.`;
+    else msg = `Connected to ${repoLabel}.`;
+    dot.title = msg;
+    if(line) line.textContent = msg;
+  }
+
+  function scheduleGithubPush(){
+    if(!ghConfig) return;
+    clearTimeout(ghPushTimer);
+    setSyncStatus("pending");
+    ghPushTimer = setTimeout(pushNow, 1500);
+  }
+
+  async function pushNow(){
+    if(!ghConfig) return;
+    clearTimeout(ghPushTimer);
+    try{
+      setSyncStatus("syncing");
+      await ghPushState(ghConfig);
+      setSyncStatus("synced");
+    }catch(e){
+      console.error(e);
+      setSyncStatus("error", e.message);
+    }
+  }
+
+  async function pullFromGithub(silent){
+    if(!ghConfig) return false;
+    try{
+      setSyncStatus("syncing");
+      const remote = await ghFetchRemote(ghConfig);
+      if(remote && remote.data && remote.data.tasks && remote.data.entries){
+        state = remote.data;
+        saveState(false); // persist locally without re-triggering a push
+        renderAll();
+        setSyncStatus("synced");
+        return true;
+      } else {
+        setSyncStatus("synced");
+        if(!silent) alert("This repo/path doesn't have any Desk Lamp data yet — use \"Push now\" to create it.");
+        return false;
+      }
+    }catch(e){
+      console.error(e);
+      setSyncStatus("error", e.message);
+      if(!silent) alert("Couldn't reach GitHub: " + e.message);
+      return false;
+    }
+  }
+
+  /* ---- sync modal wiring ---- */
+  const syncOverlay = document.getElementById("syncOverlay");
+  const ghRepoInput = document.getElementById("ghRepoInput");
+  const ghBranchInput = document.getElementById("ghBranchInput");
+  const ghPathInput = document.getElementById("ghPathInput");
+  const ghTokenInput = document.getElementById("ghTokenInput");
+
+  function openSyncModal(){
+    if(ghConfig){
+      ghRepoInput.value = `${ghConfig.owner}/${ghConfig.repo}`;
+      ghBranchInput.value = ghConfig.branch;
+      ghPathInput.value = ghConfig.path;
+      ghTokenInput.value = ghConfig.token;
+    } else {
+      ghBranchInput.value = ghBranchInput.value || "main";
+      ghPathInput.value = ghPathInput.value || "desklamp-data.json";
+    }
+    setSyncStatus(ghConfig ? "synced" : null);
+    syncOverlay.classList.add("open");
+  }
+  function closeSyncModal(){ syncOverlay.classList.remove("open"); }
+
+  document.getElementById("syncBtn").addEventListener("click", openSyncModal);
+  document.getElementById("closeSyncModal").addEventListener("click", closeSyncModal);
+  syncOverlay.addEventListener("click", e=>{ if(e.target===syncOverlay) closeSyncModal(); });
+
+  document.getElementById("ghConnectBtn").addEventListener("click", async ()=>{
+    const repoParts = ghRepoInput.value.trim().split("/");
+    const token = ghTokenInput.value.trim();
+    const branch = (ghBranchInput.value.trim() || "main");
+    const path = (ghPathInput.value.trim() || "desklamp-data.json");
+    if(repoParts.length !== 2 || !repoParts[0] || !repoParts[1] || !token){
+      alert("Fill in the repo as owner/repo, plus your access token.");
+      return;
+    }
+    ghConfig = { owner:repoParts[0], repo:repoParts[1], branch, path, token };
+    saveGhConfig(ghConfig);
+    setSyncStatus("syncing");
+    try{
+      const remote = await ghFetchRemote(ghConfig);
+      if(remote && remote.data){
+        const replace = confirm("Found existing data in this repo. Load it and replace what's on this device?");
+        if(replace){
+          state = remote.data;
+          saveState(false);
+          renderAll();
+        } else {
+          await ghPushState(ghConfig);
+        }
+      } else {
+        await ghPushState(ghConfig);
+      }
+      setSyncStatus("synced");
+    }catch(e){
+      console.error(e);
+      setSyncStatus("error", e.message);
+      alert("Couldn't connect: " + e.message);
+    }
+  });
+
+  document.getElementById("ghPullBtn").addEventListener("click", async ()=>{
+    if(!ghConfig){ alert("Connect a repo first."); return; }
+    if(!confirm("This will overwrite the data on this device with what's stored in GitHub. Continue?")) return;
+    await pullFromGithub(false);
+  });
+
+  document.getElementById("ghPushBtn").addEventListener("click", async ()=>{
+    if(!ghConfig){ alert("Connect a repo first."); return; }
+    await pushNow();
+  });
+
+  document.getElementById("ghDisconnectBtn").addEventListener("click", ()=>{
+    if(!confirm("Disconnect GitHub sync? Your data stays on this device, it just stops pushing/pulling.")) return;
+    clearGhConfig();
+    ghConfig = null;
+    ghTokenInput.value = "";
+    ghRepoInput.value = "";
+    setSyncStatus(null);
+  });
+
+  /* ---------------- boot ---------------- */
+  function renderAll(){
+    renderWeekRange();
+    renderTasks();
+    renderWeekGrid();
+    renderStats();
+  }
+
+  renderAll();
+  setSyncStatus(ghConfig ? "synced" : null);
+  if(ghConfig) pullFromGithub(true);
+  document.addEventListener("visibilitychange", ()=>{
+    if(document.visibilityState === "visible" && ghConfig) pullFromGithub(true);
+  });
+})();
+</script>
+</body>
+</html>
