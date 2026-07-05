@@ -1,0 +1,1920 @@
+{
+  "tasks": [
+    {
+      "id": "quran",
+      "name": "Qur'an",
+      "color": "var(--c-quran)",
+      "curricNote": "A personal practice rather than a course — a simple daily rotation to keep it consistent.",
+      "curriculum": [
+        {
+          "id": "q",
+          "title": null,
+          "items": [
+            {
+              "id": "q_0",
+              "label": "Read today's portion (wird)",
+              "done": false
+            },
+            {
+              "id": "q_1",
+              "label": "Tajweed practice",
+              "done": false
+            },
+            {
+              "id": "q_2",
+              "label": "Memorisation (hifz) review",
+              "done": false
+            },
+            {
+              "id": "q_3",
+              "label": "Revision (muraja'ah) of older portions",
+              "done": false
+            },
+            {
+              "id": "q_4",
+              "label": "Tafsir / reflect on meaning",
+              "done": false
+            },
+            {
+              "id": "q_5",
+              "label": "Listen to a qari's recitation",
+              "done": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "sport",
+      "name": "Sport",
+      "color": "var(--c-sport)",
+      "curricNote": "General training checklist — rotate depending on your split.",
+      "curriculum": [
+        {
+          "id": "s",
+          "title": null,
+          "items": [
+            {
+              "id": "s_0",
+              "label": "Warm-up (5–10 min)",
+              "done": false
+            },
+            {
+              "id": "s_1",
+              "label": "Strength / resistance training",
+              "done": false
+            },
+            {
+              "id": "s_2",
+              "label": "Cardio session",
+              "done": false
+            },
+            {
+              "id": "s_3",
+              "label": "Mobility & stretching",
+              "done": false
+            },
+            {
+              "id": "s_4",
+              "label": "Planned rest / active recovery day",
+              "done": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ccna",
+      "name": "CCNA video (Sajad)",
+      "color": "var(--c-ccna)",
+      "curricNote": "Couldn't verify the exact channel/video numbering behind \"Sajad CCNA 220\", so this checklist follows the official Cisco CCNA 200-301 exam blueprint domains instead — use it to tag which domain your current video covers.",
+      "curriculum": [
+        {
+          "id": "c",
+          "title": null,
+          "items": [
+            {
+              "id": "c_0",
+              "label": "1.0 Network Fundamentals",
+              "done": false
+            },
+            {
+              "id": "c_1",
+              "label": "2.0 Network Access (switching, VLANs, trunking, EtherChannel)",
+              "done": false
+            },
+            {
+              "id": "c_2",
+              "label": "3.0 IP Connectivity (routing, OSPF)",
+              "done": false
+            },
+            {
+              "id": "c_3",
+              "label": "4.0 IP Services (NAT, NTP, DHCP, QoS)",
+              "done": false
+            },
+            {
+              "id": "c_4",
+              "label": "5.0 Security Fundamentals (ACLs, VPNs, wireless security)",
+              "done": false
+            },
+            {
+              "id": "c_5",
+              "label": "6.0 Automation & Programmability (APIs, Ansible, JSON)",
+              "done": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "devops",
+      "name": "Decoding DevOps (Imran Teli)",
+      "color": "var(--c-devops)",
+      "curricNote": "Sections 1–10 (Introduction → Introducing Containers) list the real lecture titles from Udemy's course-content listing. The remaining sections list the named topics from the official course description — Udemy truncates the full lecture list, and each of these topics can span one or more videos.",
+      "curriculum": [
+        {
+          "id": "d0",
+          "title": "Introduction",
+          "items": [
+            {
+              "id": "d0_0",
+              "label": "Introduction",
+              "done": false
+            },
+            {
+              "id": "d0_1",
+              "label": "What is DevOps?",
+              "done": false
+            },
+            {
+              "id": "d0_2",
+              "label": "What is Continuous Integration?",
+              "done": false
+            },
+            {
+              "id": "d0_3",
+              "label": "What is Continuous Delivery?",
+              "done": false
+            }
+          ]
+        },
+        {
+          "id": "d1",
+          "title": "Prerequisites Info & Setup",
+          "items": [
+            {
+              "id": "d1_0",
+              "label": "Tools Prerequisite Information",
+              "done": false
+            },
+            {
+              "id": "d1_1",
+              "label": "Chocolatey for Windows",
+              "done": false
+            },
+            {
+              "id": "d1_2",
+              "label": "Homebrew for MacOS",
+              "done": false
+            },
+            {
+              "id": "d1_3",
+              "label": "Installing Softwares",
+              "done": false
+            },
+            {
+              "id": "d1_4",
+              "label": "Tools Prerequisites for CentOS 9, RHEL 9 & Rocky Linux",
+              "done": false
+            },
+            {
+              "id": "d1_5",
+              "label": "Tools Prerequisites for Ubuntu 24",
+              "done": false
+            },
+            {
+              "id": "d1_6",
+              "label": "Signups",
+              "done": false
+            },
+            {
+              "id": "d1_7",
+              "label": "AWS Setup",
+              "done": false
+            }
+          ]
+        },
+        {
+          "id": "d2",
+          "title": "VM Setup",
+          "items": [
+            {
+              "id": "d2_0",
+              "label": "Welcome to Virtualization",
+              "done": false
+            },
+            {
+              "id": "d2_1",
+              "label": "What is Virtualization",
+              "done": false
+            },
+            {
+              "id": "d2_2",
+              "label": "Introduction",
+              "done": false
+            },
+            {
+              "id": "d2_3",
+              "label": "VM - Manually (Windows & macOS Intel chip)",
+              "done": false
+            },
+            {
+              "id": "d2_4",
+              "label": "VM - Automatically (Windows & macOS Intel chip)",
+              "done": false
+            },
+            {
+              "id": "d2_5",
+              "label": "VM on macOS M1 chip",
+              "done": false
+            },
+            {
+              "id": "d2_6",
+              "label": "Vagrant & VirtualBox",
+              "done": false
+            }
+          ]
+        },
+        {
+          "id": "d3",
+          "title": "Linux",
+          "items": [
+            {
+              "id": "d3_0",
+              "label": "Introduction to Linux",
+              "done": false
+            },
+            {
+              "id": "d3_1",
+              "label": "Commands and File Systems",
+              "done": false
+            },
+            {
+              "id": "d3_2",
+              "label": "More Commands (mkdir, cp, mv, touch etc.)",
+              "done": false
+            },
+            {
+              "id": "d3_3",
+              "label": "Vim Editor",
+              "done": false
+            },
+            {
+              "id": "d3_4",
+              "label": "File Types",
+              "done": false
+            },
+            {
+              "id": "d3_5",
+              "label": "Filters",
+              "done": false
+            },
+            {
+              "id": "d3_6",
+              "label": "Redirections",
+              "done": false
+            },
+            {
+              "id": "d3_7",
+              "label": "Users and Groups",
+              "done": false
+            },
+            {
+              "id": "d3_8",
+              "label": "File Permissions",
+              "done": false
+            },
+            {
+              "id": "d3_9",
+              "label": "Sudo",
+              "done": false
+            },
+            {
+              "id": "d3_10",
+              "label": "Package Management",
+              "done": false
+            },
+            {
+              "id": "d3_11",
+              "label": "Services",
+              "done": false
+            },
+            {
+              "id": "d3_12",
+              "label": "Processes",
+              "done": false
+            },
+            {
+              "id": "d3_13",
+              "label": "Archiving",
+              "done": false
+            },
+            {
+              "id": "d3_14",
+              "label": "Ubuntu Commands",
+              "done": false
+            }
+          ]
+        },
+        {
+          "id": "d4",
+          "title": "Git",
+          "items": [
+            {
+              "id": "d4_0",
+              "label": "Introduction",
+              "done": false
+            },
+            {
+              "id": "d4_1",
+              "label": "Versioning",
+              "done": false
+            },
+            {
+              "id": "d4_2",
+              "label": "Branches & More",
+              "done": false
+            },
+            {
+              "id": "d4_3",
+              "label": "Rollback",
+              "done": false
+            },
+            {
+              "id": "d4_4",
+              "label": "Git SSH Login",
+              "done": false
+            },
+            {
+              "id": "d4_5",
+              "label": "Git Tags, Semantic Versioning & More",
+              "done": false
+            },
+            {
+              "id": "d4_6",
+              "label": "Setup GitHub Copilot",
+              "done": false
+            }
+          ]
+        },
+        {
+          "id": "d5",
+          "title": "Vagrant & Linux Servers",
+          "items": [
+            {
+              "id": "d5_0",
+              "label": "Vagrant VMs",
+              "done": false
+            },
+            {
+              "id": "d5_1",
+              "label": "Vagrant IP, RAM & CPU",
+              "done": false
+            },
+            {
+              "id": "d5_2",
+              "label": "Vagrant Sync Directories",
+              "done": false
+            },
+            {
+              "id": "d5_3",
+              "label": "Provisioning",
+              "done": false
+            },
+            {
+              "id": "d5_4",
+              "label": "Website Setup",
+              "done": false
+            },
+            {
+              "id": "d5_5",
+              "label": "WordPress Setup",
+              "done": false
+            },
+            {
+              "id": "d5_6",
+              "label": "Automate Website Setup",
+              "done": false
+            },
+            {
+              "id": "d5_7",
+              "label": "Automate WordPress Setup",
+              "done": false
+            },
+            {
+              "id": "d5_8",
+              "label": "Copilot AI for Coding",
+              "done": false
+            },
+            {
+              "id": "d5_9",
+              "label": "Multi-VM Vagrantfile",
+              "done": false
+            },
+            {
+              "id": "d5_10",
+              "label": "Systemctl & Tomcat 10",
+              "done": false
+            }
+          ]
+        },
+        {
+          "id": "d6",
+          "title": "Variables, JSON & YAML",
+          "items": [
+            {
+              "id": "d6_0",
+              "label": "Introduction",
+              "done": false
+            },
+            {
+              "id": "d6_1",
+              "label": "Variables & Python Data Structures",
+              "done": false
+            },
+            {
+              "id": "d6_2",
+              "label": "JSON & YAML",
+              "done": false
+            }
+          ]
+        },
+        {
+          "id": "d7",
+          "title": "VProfile Project Setup (Manual & Automated)",
+          "items": [
+            {
+              "id": "d7_0",
+              "label": "Welcome to the Project",
+              "done": false
+            },
+            {
+              "id": "d7_1",
+              "label": "Introduction",
+              "done": false
+            },
+            {
+              "id": "d7_2",
+              "label": "VM Setup",
+              "done": false
+            },
+            {
+              "id": "d7_3",
+              "label": "MySQL Setup",
+              "done": false
+            },
+            {
+              "id": "d7_4",
+              "label": "Memcache Setup",
+              "done": false
+            },
+            {
+              "id": "d7_5",
+              "label": "RabbitMQ Setup",
+              "done": false
+            },
+            {
+              "id": "d7_6",
+              "label": "App Setup",
+              "done": false
+            },
+            {
+              "id": "d7_7",
+              "label": "Nginx Setup",
+              "done": false
+            },
+            {
+              "id": "d7_8",
+              "label": "Validate the Deployment",
+              "done": false
+            },
+            {
+              "id": "d7_9",
+              "label": "Automated - Introduction",
+              "done": false
+            },
+            {
+              "id": "d7_10",
+              "label": "Automated - Code",
+              "done": false
+            },
+            {
+              "id": "d7_11",
+              "label": "Automated - Execution",
+              "done": false
+            }
+          ]
+        },
+        {
+          "id": "d8",
+          "title": "Networking",
+          "items": [
+            {
+              "id": "d8_0",
+              "label": "OSI Model",
+              "done": false
+            },
+            {
+              "id": "d8_1",
+              "label": "Understanding Networks & IP",
+              "done": false
+            },
+            {
+              "id": "d8_2",
+              "label": "Protocols, Ports etc.",
+              "done": false
+            },
+            {
+              "id": "d8_3",
+              "label": "Networking Commands",
+              "done": false
+            }
+          ]
+        },
+        {
+          "id": "d9",
+          "title": "Introducing Containers",
+          "items": [
+            {
+              "id": "d9_0",
+              "label": "What are Containers",
+              "done": false
+            },
+            {
+              "id": "d9_1",
+              "label": "What is Docker",
+              "done": false
+            },
+            {
+              "id": "d9_2",
+              "label": "Hands-on Docker Containers",
+              "done": false
+            },
+            {
+              "id": "d9_3",
+              "label": "VProfile Project on Containers",
+              "done": false
+            },
+            {
+              "id": "d9_4",
+              "label": "Microservices",
+              "done": false
+            },
+            {
+              "id": "d9_5",
+              "label": "Microservice Project",
+              "done": false
+            }
+          ]
+        },
+        {
+          "id": "d10",
+          "title": "AI-Assisted Automation Layer",
+          "items": [
+            {
+              "id": "d10_0",
+              "label": "GitHub Copilot for Scripting & Automation",
+              "done": false
+            },
+            {
+              "id": "d10_1",
+              "label": "AI-Assisted Development Workflows",
+              "done": false
+            },
+            {
+              "id": "d10_2",
+              "label": "Amazon Q for Cloud Automation",
+              "done": false
+            },
+            {
+              "id": "d10_3",
+              "label": "AI-Integrated Helm Workflows",
+              "done": false
+            }
+          ]
+        },
+        {
+          "id": "d11",
+          "title": "AWS Cloud Fundamentals",
+          "items": [
+            {
+              "id": "d11_0",
+              "label": "Cloud Computing Concepts",
+              "done": false
+            },
+            {
+              "id": "d11_1",
+              "label": "IAM",
+              "done": false
+            },
+            {
+              "id": "d11_2",
+              "label": "EC2",
+              "done": false
+            },
+            {
+              "id": "d11_3",
+              "label": "EBS",
+              "done": false
+            },
+            {
+              "id": "d11_4",
+              "label": "ELB",
+              "done": false
+            },
+            {
+              "id": "d11_5",
+              "label": "SSM",
+              "done": false
+            },
+            {
+              "id": "d11_6",
+              "label": "CloudShell",
+              "done": false
+            },
+            {
+              "id": "d11_7",
+              "label": "AWS CLI",
+              "done": false
+            },
+            {
+              "id": "d11_8",
+              "label": "S3",
+              "done": false
+            },
+            {
+              "id": "d11_9",
+              "label": "CloudWatch",
+              "done": false
+            },
+            {
+              "id": "d11_10",
+              "label": "RDS",
+              "done": false
+            },
+            {
+              "id": "d11_11",
+              "label": "Auto Scaling",
+              "done": false
+            },
+            {
+              "id": "d11_12",
+              "label": "Route 53",
+              "done": false
+            }
+          ]
+        },
+        {
+          "id": "d12",
+          "title": "Project: Lift & Shift Application to AWS",
+          "items": [
+            {
+              "id": "d12_0",
+              "label": "Application Migration to AWS",
+              "done": false
+            },
+            {
+              "id": "d12_1",
+              "label": "Cloud Architecture Best Practices",
+              "done": false
+            }
+          ]
+        },
+        {
+          "id": "d13",
+          "title": "Project: Re-Architecting Applications on AWS",
+          "items": [
+            {
+              "id": "d13_0",
+              "label": "PaaS-Based Architecture",
+              "done": false
+            },
+            {
+              "id": "d13_1",
+              "label": "SaaS-Based Architecture",
+              "done": false
+            },
+            {
+              "id": "d13_2",
+              "label": "Cloud-Native Design Principles",
+              "done": false
+            }
+          ]
+        },
+        {
+          "id": "d14",
+          "title": "Source Control & Build Automation",
+          "items": [
+            {
+              "id": "d14_0",
+              "label": "Git",
+              "done": false
+            },
+            {
+              "id": "d14_1",
+              "label": "GitHub",
+              "done": false
+            },
+            {
+              "id": "d14_2",
+              "label": "Maven",
+              "done": false
+            }
+          ]
+        },
+        {
+          "id": "d15",
+          "title": "Jenkins",
+          "items": [
+            {
+              "id": "d15_0",
+              "label": "CI/CD Pipelines",
+              "done": false
+            },
+            {
+              "id": "d15_1",
+              "label": "Master/Agent Architecture",
+              "done": false
+            },
+            {
+              "id": "d15_2",
+              "label": "Nexus Integration",
+              "done": false
+            },
+            {
+              "id": "d15_3",
+              "label": "SonarQube Integration",
+              "done": false
+            },
+            {
+              "id": "d15_4",
+              "label": "Automated Build & Deployment Workflows",
+              "done": false
+            }
+          ]
+        },
+        {
+          "id": "d16",
+          "title": "GitHub Actions",
+          "items": [
+            {
+              "id": "d16_0",
+              "label": "Workflow Automation",
+              "done": false
+            },
+            {
+              "id": "d16_1",
+              "label": "Self-Hosted Runners",
+              "done": false
+            },
+            {
+              "id": "d16_2",
+              "label": "Security Scanning",
+              "done": false
+            },
+            {
+              "id": "d16_3",
+              "label": "CI/CD Pipelines",
+              "done": false
+            }
+          ]
+        },
+        {
+          "id": "d17",
+          "title": "GitLab CI/CD",
+          "items": [
+            {
+              "id": "d17_0",
+              "label": "Pipelines",
+              "done": false
+            },
+            {
+              "id": "d17_1",
+              "label": "Stages",
+              "done": false
+            },
+            {
+              "id": "d17_2",
+              "label": "Docker Integration",
+              "done": false
+            },
+            {
+              "id": "d17_3",
+              "label": "Automated Deployments",
+              "done": false
+            }
+          ]
+        },
+        {
+          "id": "d18",
+          "title": "Python Automation Layer",
+          "items": [
+            {
+              "id": "d18_0",
+              "label": "Python Fundamentals for DevOps",
+              "done": false
+            },
+            {
+              "id": "d18_1",
+              "label": "OS Automation",
+              "done": false
+            },
+            {
+              "id": "d18_2",
+              "label": "AWS Automation with Python",
+              "done": false
+            },
+            {
+              "id": "d18_3",
+              "label": "Amazon Q Assisted Development",
+              "done": false
+            }
+          ]
+        },
+        {
+          "id": "d19",
+          "title": "Terraform",
+          "items": [
+            {
+              "id": "d19_0",
+              "label": "Terraform Fundamentals",
+              "done": false
+            },
+            {
+              "id": "d19_1",
+              "label": "Variables",
+              "done": false
+            },
+            {
+              "id": "d19_2",
+              "label": "Modules",
+              "done": false
+            },
+            {
+              "id": "d19_3",
+              "label": "Remote State & Backends",
+              "done": false
+            },
+            {
+              "id": "d19_4",
+              "label": "Infrastructure as Code Best Practices",
+              "done": false
+            }
+          ]
+        },
+        {
+          "id": "d20",
+          "title": "Terraform Project",
+          "items": [
+            {
+              "id": "d20_0",
+              "label": "AWS VPC Automation using Terraform",
+              "done": false
+            }
+          ]
+        },
+        {
+          "id": "d21",
+          "title": "Monitoring & Observability",
+          "items": [
+            {
+              "id": "d21_0",
+              "label": "Monitoring Fundamentals",
+              "done": false
+            },
+            {
+              "id": "d21_1",
+              "label": "Observability Fundamentals",
+              "done": false
+            },
+            {
+              "id": "d21_2",
+              "label": "Why Monitoring Matters in Production",
+              "done": false
+            },
+            {
+              "id": "d21_3",
+              "label": "Prometheus Setup & Configuration",
+              "done": false
+            },
+            {
+              "id": "d21_4",
+              "label": "Grafana Setup & Dashboarding",
+              "done": false
+            },
+            {
+              "id": "d21_5",
+              "label": "Loki for Centralized Logging",
+              "done": false
+            },
+            {
+              "id": "d21_6",
+              "label": "Alloy for Metrics & Logs Collection",
+              "done": false
+            },
+            {
+              "id": "d21_7",
+              "label": "PromQL Fundamentals",
+              "done": false
+            },
+            {
+              "id": "d21_8",
+              "label": "Dashboard Design Best Practices",
+              "done": false
+            },
+            {
+              "id": "d21_9",
+              "label": "Alerting & Notification Strategies",
+              "done": false
+            },
+            {
+              "id": "d21_10",
+              "label": "Slack Integrations",
+              "done": false
+            },
+            {
+              "id": "d21_11",
+              "label": "Centralized Logging Workflows",
+              "done": false
+            },
+            {
+              "id": "d21_12",
+              "label": "Production Monitoring Practices",
+              "done": false
+            }
+          ]
+        },
+        {
+          "id": "d22",
+          "title": "Ansible",
+          "items": [
+            {
+              "id": "d22_0",
+              "label": "Ad Hoc Commands",
+              "done": false
+            },
+            {
+              "id": "d22_1",
+              "label": "Modules",
+              "done": false
+            },
+            {
+              "id": "d22_2",
+              "label": "YAML Fundamentals",
+              "done": false
+            },
+            {
+              "id": "d22_3",
+              "label": "Playbooks",
+              "done": false
+            },
+            {
+              "id": "d22_4",
+              "label": "Variables",
+              "done": false
+            },
+            {
+              "id": "d22_5",
+              "label": "Conditions",
+              "done": false
+            },
+            {
+              "id": "d22_6",
+              "label": "Loops",
+              "done": false
+            },
+            {
+              "id": "d22_7",
+              "label": "Templates",
+              "done": false
+            },
+            {
+              "id": "d22_8",
+              "label": "Handlers",
+              "done": false
+            },
+            {
+              "id": "d22_9",
+              "label": "Roles",
+              "done": false
+            }
+          ]
+        },
+        {
+          "id": "d23",
+          "title": "AWS Automation with Ansible",
+          "items": [
+            {
+              "id": "d23_0",
+              "label": "Cloud Provisioning",
+              "done": false
+            },
+            {
+              "id": "d23_1",
+              "label": "Configuration Management",
+              "done": false
+            },
+            {
+              "id": "d23_2",
+              "label": "Deployment Automation",
+              "done": false
+            }
+          ]
+        },
+        {
+          "id": "d24",
+          "title": "Advanced AWS DevOps Layer",
+          "items": [
+            {
+              "id": "d24_0",
+              "label": "VPC Deep Dive",
+              "done": false
+            },
+            {
+              "id": "d24_1",
+              "label": "AWS Lambda",
+              "done": false
+            },
+            {
+              "id": "d24_2",
+              "label": "Cloud Logging",
+              "done": false
+            },
+            {
+              "id": "d24_3",
+              "label": "Custom Metrics",
+              "done": false
+            },
+            {
+              "id": "d24_4",
+              "label": "Monitoring & Automation",
+              "done": false
+            }
+          ]
+        },
+        {
+          "id": "d25",
+          "title": "Project: CI/CD on AWS",
+          "items": [
+            {
+              "id": "d25_0",
+              "label": "Elastic Beanstalk",
+              "done": false
+            },
+            {
+              "id": "d25_1",
+              "label": "RDS",
+              "done": false
+            },
+            {
+              "id": "d25_2",
+              "label": "CodePipeline",
+              "done": false
+            },
+            {
+              "id": "d25_3",
+              "label": "Automated Deployments",
+              "done": false
+            },
+            {
+              "id": "d25_4",
+              "label": "Production CI/CD Workflows",
+              "done": false
+            }
+          ]
+        },
+        {
+          "id": "d26",
+          "title": "Multi-Tier Application Deployment on GCP",
+          "items": [
+            {
+              "id": "d26_0",
+              "label": "Cloud Shell",
+              "done": false
+            },
+            {
+              "id": "d26_1",
+              "label": "VPC",
+              "done": false
+            },
+            {
+              "id": "d26_2",
+              "label": "Firewall Rules",
+              "done": false
+            },
+            {
+              "id": "d26_3",
+              "label": "Virtual Machines",
+              "done": false
+            },
+            {
+              "id": "d26_4",
+              "label": "Cloud SQL",
+              "done": false
+            },
+            {
+              "id": "d26_5",
+              "label": "Memorystore",
+              "done": false
+            },
+            {
+              "id": "d26_6",
+              "label": "Cloud DNS",
+              "done": false
+            },
+            {
+              "id": "d26_7",
+              "label": "Managed Instance Groups",
+              "done": false
+            },
+            {
+              "id": "d26_8",
+              "label": "HTTPS Load Balancers",
+              "done": false
+            },
+            {
+              "id": "d26_9",
+              "label": "Certificate Manager",
+              "done": false
+            },
+            {
+              "id": "d26_10",
+              "label": "Production-Grade Cloud Architecture",
+              "done": false
+            }
+          ]
+        },
+        {
+          "id": "d27",
+          "title": "Docker (deep dive)",
+          "items": [
+            {
+              "id": "d27_0",
+              "label": "Containers",
+              "done": false
+            },
+            {
+              "id": "d27_1",
+              "label": "Images",
+              "done": false
+            },
+            {
+              "id": "d27_2",
+              "label": "Dockerfiles",
+              "done": false
+            },
+            {
+              "id": "d27_3",
+              "label": "Volumes",
+              "done": false
+            },
+            {
+              "id": "d27_4",
+              "label": "Networks",
+              "done": false
+            },
+            {
+              "id": "d27_5",
+              "label": "Container Best Practices",
+              "done": false
+            }
+          ]
+        },
+        {
+          "id": "d28",
+          "title": "Kubernetes",
+          "items": [
+            {
+              "id": "d28_0",
+              "label": "Kubernetes Architecture",
+              "done": false
+            },
+            {
+              "id": "d28_1",
+              "label": "Cluster Setup",
+              "done": false
+            },
+            {
+              "id": "d28_2",
+              "label": "Pods",
+              "done": false
+            },
+            {
+              "id": "d28_3",
+              "label": "Deployments",
+              "done": false
+            },
+            {
+              "id": "d28_4",
+              "label": "Services",
+              "done": false
+            },
+            {
+              "id": "d28_5",
+              "label": "ConfigMaps",
+              "done": false
+            },
+            {
+              "id": "d28_6",
+              "label": "Secrets",
+              "done": false
+            },
+            {
+              "id": "d28_7",
+              "label": "Ingress",
+              "done": false
+            },
+            {
+              "id": "d28_8",
+              "label": "Autoscaling",
+              "done": false
+            },
+            {
+              "id": "d28_9",
+              "label": "Application Deployments",
+              "done": false
+            },
+            {
+              "id": "d28_10",
+              "label": "Production Workloads",
+              "done": false
+            }
+          ]
+        },
+        {
+          "id": "d29",
+          "title": "Helm & Kubernetes Tooling",
+          "items": [
+            {
+              "id": "d29_0",
+              "label": "Helm Fundamentals",
+              "done": false
+            },
+            {
+              "id": "d29_1",
+              "label": "Helm Charts",
+              "done": false
+            },
+            {
+              "id": "d29_2",
+              "label": "AI-Assisted Helm Development",
+              "done": false
+            },
+            {
+              "id": "d29_3",
+              "label": "Lens Kubernetes IDE",
+              "done": false
+            }
+          ]
+        },
+        {
+          "id": "d30",
+          "title": "Project: VProfile Deployment on Kubernetes",
+          "items": [
+            {
+              "id": "d30_0",
+              "label": "Containerization",
+              "done": false
+            },
+            {
+              "id": "d30_1",
+              "label": "Kubernetes Deployment",
+              "done": false
+            },
+            {
+              "id": "d30_2",
+              "label": "Service Exposure",
+              "done": false
+            },
+            {
+              "id": "d30_3",
+              "label": "Scaling",
+              "done": false
+            },
+            {
+              "id": "d30_4",
+              "label": "Production Deployment Practices",
+              "done": false
+            }
+          ]
+        },
+        {
+          "id": "d31",
+          "title": "End-to-End GitOps Project",
+          "items": [
+            {
+              "id": "d31_0",
+              "label": "GitHub Actions CI Pipeline",
+              "done": false
+            },
+            {
+              "id": "d31_1",
+              "label": "Automated Docker Image Builds",
+              "done": false
+            },
+            {
+              "id": "d31_2",
+              "label": "Container Registry Integration",
+              "done": false
+            },
+            {
+              "id": "d31_3",
+              "label": "Helm-Based Deployments",
+              "done": false
+            },
+            {
+              "id": "d31_4",
+              "label": "Kubernetes Application Delivery",
+              "done": false
+            },
+            {
+              "id": "d31_5",
+              "label": "ArgoCD Installation & Configuration",
+              "done": false
+            },
+            {
+              "id": "d31_6",
+              "label": "GitOps Workflow Implementation",
+              "done": false
+            },
+            {
+              "id": "d31_7",
+              "label": "Git as the Single Source of Truth",
+              "done": false
+            },
+            {
+              "id": "d31_8",
+              "label": "Automated Application Updates",
+              "done": false
+            },
+            {
+              "id": "d31_9",
+              "label": "Continuous Deployment with ArgoCD",
+              "done": false
+            },
+            {
+              "id": "d31_10",
+              "label": "Production-Style Release Management",
+              "done": false
+            },
+            {
+              "id": "d31_11",
+              "label": "Modern Cloud-Native Delivery Practices",
+              "done": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "python",
+      "name": "100 Days of Python (Angela Yu)",
+      "color": "var(--c-python)",
+      "curricNote": "All 100 days, with real day titles from the published course syllabus, grouped the way the course itself groups them (Beginner → Professional).",
+      "curriculum": [
+        {
+          "id": "py_beg",
+          "title": "👨🏻‍🎓 Beginner (Days 1–14)",
+          "items": [
+            {
+              "id": "py_beg_0",
+              "label": "Day 01: Working with Variables in Python to Manage Data",
+              "done": false
+            },
+            {
+              "id": "py_beg_1",
+              "label": "Day 02: Understanding Data Types and How to Manipulate Strings",
+              "done": false
+            },
+            {
+              "id": "py_beg_2",
+              "label": "Day 03: Control Flow and Logical Operators",
+              "done": false
+            },
+            {
+              "id": "py_beg_3",
+              "label": "Day 04: Randomisation and Python Lists",
+              "done": false
+            },
+            {
+              "id": "py_beg_4",
+              "label": "Day 05: Python Loops",
+              "done": false
+            },
+            {
+              "id": "py_beg_5",
+              "label": "Day 06: Python Functions & Karel",
+              "done": false
+            },
+            {
+              "id": "py_beg_6",
+              "label": "Day 07: Hangman",
+              "done": false
+            },
+            {
+              "id": "py_beg_7",
+              "label": "Day 08: Function Parameters & Caesar Cipher",
+              "done": false
+            },
+            {
+              "id": "py_beg_8",
+              "label": "Day 09: Dictionaries, Nesting and the Secret Auction",
+              "done": false
+            },
+            {
+              "id": "py_beg_9",
+              "label": "Day 10: Function Return Values and the Calculator Project",
+              "done": false
+            },
+            {
+              "id": "py_beg_10",
+              "label": "Day 11: Blackjack Capstone Project",
+              "done": false
+            },
+            {
+              "id": "py_beg_11",
+              "label": "Day 12: Scope and Namespacing in Python",
+              "done": false
+            },
+            {
+              "id": "py_beg_12",
+              "label": "Day 13: Debugging: How to Find and Fix Errors in your Code",
+              "done": false
+            },
+            {
+              "id": "py_beg_13",
+              "label": "Day 14: Higher Lower Game Project",
+              "done": false
+            }
+          ]
+        },
+        {
+          "id": "py_int",
+          "title": "🏋🏻‍♂️ Intermediate (Days 15–31)",
+          "items": [
+            {
+              "id": "py_int_0",
+              "label": "Day 15: Local Development Environment Setup & the Coffee Machine Project",
+              "done": false
+            },
+            {
+              "id": "py_int_1",
+              "label": "Day 16: Object Oriented Programming (OOP)",
+              "done": false
+            },
+            {
+              "id": "py_int_2",
+              "label": "Day 17: The Quiz Project & the Benefits of OOP",
+              "done": false
+            },
+            {
+              "id": "py_int_3",
+              "label": "Day 18: Turtle Graphics and GUIs",
+              "done": false
+            },
+            {
+              "id": "py_int_4",
+              "label": "Day 19: Instances, State and Higher Order Functions",
+              "done": false
+            },
+            {
+              "id": "py_int_5",
+              "label": "Day 20: Build the Snake Game Part 1: Animation & Coordinates",
+              "done": false
+            },
+            {
+              "id": "py_int_6",
+              "label": "Day 21: Build the Snake Game Part 2: Inheritance & List Slicing",
+              "done": false
+            },
+            {
+              "id": "py_int_7",
+              "label": "Day 22: Build Pong: The Famous Arcade Game",
+              "done": false
+            },
+            {
+              "id": "py_int_8",
+              "label": "Day 23: The Turtle Crossing Capstone Project",
+              "done": false
+            },
+            {
+              "id": "py_int_9",
+              "label": "Day 24: Files, Directories and Paths",
+              "done": false
+            },
+            {
+              "id": "py_int_10",
+              "label": "Day 25: Working with CSV Data and the Pandas Library",
+              "done": false
+            },
+            {
+              "id": "py_int_11",
+              "label": "Day 26: List Comprehension & the NATO Pilot's Alphabet",
+              "done": false
+            },
+            {
+              "id": "py_int_12",
+              "label": "Day 27: Tkinter, *args, **kwargs and Creating GUI Programs",
+              "done": false
+            },
+            {
+              "id": "py_int_13",
+              "label": "Day 28: Tkinter, Dynamic Typing and the Pomodoro GUI Application",
+              "done": false
+            },
+            {
+              "id": "py_int_14",
+              "label": "Day 29: Building a Password Manager GUI App with Tkinter",
+              "done": false
+            },
+            {
+              "id": "py_int_15",
+              "label": "Day 30: Errors, Exceptions and JSON Data: Improving the Password Manager",
+              "done": false
+            },
+            {
+              "id": "py_int_16",
+              "label": "Day 31: Capstone Project - Flash Card App",
+              "done": false
+            }
+          ]
+        },
+        {
+          "id": "py_intp",
+          "title": "💪 Intermediate+ (Days 32–58)",
+          "items": [
+            {
+              "id": "py_intp_0",
+              "label": "Day 32: Send Email (smtplib) & Manage Dates (datetime): The Automated Birthday Wisher",
+              "done": false
+            },
+            {
+              "id": "py_intp_1",
+              "label": "Day 33: API Endpoints and API Parameters - ISS Overhead Notifier",
+              "done": false
+            },
+            {
+              "id": "py_intp_2",
+              "label": "Day 34: API Practice - Creating a GUI Quiz App",
+              "done": false
+            },
+            {
+              "id": "py_intp_3",
+              "label": "Day 35: Keys, Authentication & Environment Variables: Send SMS",
+              "done": false
+            },
+            {
+              "id": "py_intp_4",
+              "label": "Day 36: Stock Trading News Alert Project",
+              "done": false
+            },
+            {
+              "id": "py_intp_5",
+              "label": "Day 37: Habit Tracking Pixel Project",
+              "done": false
+            },
+            {
+              "id": "py_intp_6",
+              "label": "Day 38: Build a Workout Tracking App that Talks to Google Sheets!",
+              "done": false
+            },
+            {
+              "id": "py_intp_7",
+              "label": "Day 39: Capstone Part 1: Flight Deal Finder",
+              "done": false
+            },
+            {
+              "id": "py_intp_8",
+              "label": "Day 40: Capstone Part 2: Flight Club!",
+              "done": false
+            },
+            {
+              "id": "py_intp_9",
+              "label": "Day 41: Introduction to HTML",
+              "done": false
+            },
+            {
+              "id": "py_intp_10",
+              "label": "Day 42: Intermediate HTML",
+              "done": false
+            },
+            {
+              "id": "py_intp_11",
+              "label": "Day 43: Introduction to CSS",
+              "done": false
+            },
+            {
+              "id": "py_intp_12",
+              "label": "Day 44: Intermediate CSS",
+              "done": false
+            },
+            {
+              "id": "py_intp_13",
+              "label": "Day 45: Web Scraping with Beautiful Soup",
+              "done": false
+            },
+            {
+              "id": "py_intp_14",
+              "label": "Day 46: Create a Spotify Playlist using the Musical Time Machine",
+              "done": false
+            },
+            {
+              "id": "py_intp_15",
+              "label": "Day 47: Create an Automated Amazon Price Tracker",
+              "done": false
+            },
+            {
+              "id": "py_intp_16",
+              "label": "Day 48: Selenium Webdriver and Game Playing Bot",
+              "done": false
+            },
+            {
+              "id": "py_intp_17",
+              "label": "Day 49: Automating Job Applications on LinkedIn",
+              "done": false
+            },
+            {
+              "id": "py_intp_18",
+              "label": "Day 50: Automated Tinder Swiper",
+              "done": false
+            },
+            {
+              "id": "py_intp_19",
+              "label": "Day 51: Internet Speed Twitter Complaint Bot",
+              "done": false
+            },
+            {
+              "id": "py_intp_20",
+              "label": "Day 52: Instagram Follower Bot",
+              "done": false
+            },
+            {
+              "id": "py_intp_21",
+              "label": "Day 53: Automated Data Entry Job",
+              "done": false
+            },
+            {
+              "id": "py_intp_22",
+              "label": "Day 54: Introduction to Web Development with Flask",
+              "done": false
+            },
+            {
+              "id": "py_intp_23",
+              "label": "Day 55: HTML & URL Parsing in Flask and the Higher Lower Game",
+              "done": false
+            },
+            {
+              "id": "py_intp_24",
+              "label": "Day 56: Rendering HTML/Static Files and Name Card Project",
+              "done": false
+            },
+            {
+              "id": "py_intp_25",
+              "label": "Day 57: Templating with Jinja and Blog Project",
+              "done": false
+            },
+            {
+              "id": "py_intp_26",
+              "label": "Day 58: Bootstrap",
+              "done": false
+            }
+          ]
+        },
+        {
+          "id": "py_adv",
+          "title": "🚀 Advanced (Days 59–80)",
+          "items": [
+            {
+              "id": "py_adv_0",
+              "label": "Day 59: Upgraded Blog with Bootstrap",
+              "done": false
+            },
+            {
+              "id": "py_adv_1",
+              "label": "Day 60: HTML Forms with Flask",
+              "done": false
+            },
+            {
+              "id": "py_adv_2",
+              "label": "Day 61: Building Advanced Forms with WTForms",
+              "done": false
+            },
+            {
+              "id": "py_adv_3",
+              "label": "Day 62: Flask, WTForms, Bootstrap and CSV - Coffee & Wifi Project",
+              "done": false
+            },
+            {
+              "id": "py_adv_4",
+              "label": "Day 63: Databases with SQLite and SQLAlchemy",
+              "done": false
+            },
+            {
+              "id": "py_adv_5",
+              "label": "Day 64: My Top 10 Movies Website",
+              "done": false
+            },
+            {
+              "id": "py_adv_6",
+              "label": "Day 65: Web Design School - How to Create a Website that People will Love",
+              "done": false
+            },
+            {
+              "id": "py_adv_7",
+              "label": "Day 66: Building Your Own API with RESTful Routing",
+              "done": false
+            },
+            {
+              "id": "py_adv_8",
+              "label": "Day 67: Blog Capstone Project Part 3 - RESTful Routing",
+              "done": false
+            },
+            {
+              "id": "py_adv_9",
+              "label": "Day 68: Authentication with Flask",
+              "done": false
+            },
+            {
+              "id": "py_adv_10",
+              "label": "Day 69: Blog Capstone Project Part 4 - Adding Users",
+              "done": false
+            },
+            {
+              "id": "py_adv_11",
+              "label": "Day 70: Deploying Your Web Application with Heroku",
+              "done": false
+            },
+            {
+              "id": "py_adv_12",
+              "label": "Day 71: Data Exploration with Pandas: College Major",
+              "done": false
+            },
+            {
+              "id": "py_adv_13",
+              "label": "Day 72: Data Visualisation with Matplotlib: Programming Languages",
+              "done": false
+            },
+            {
+              "id": "py_adv_14",
+              "label": "Day 73: Aggregate & Merge Data with Pandas: Analyse the LEGO Dataset",
+              "done": false
+            },
+            {
+              "id": "py_adv_15",
+              "label": "Day 74: Google Trends Data: Resampling and Visualising Time Series",
+              "done": false
+            },
+            {
+              "id": "py_adv_16",
+              "label": "Day 75: Beautiful Plotly Charts & Analysing the Android App Store",
+              "done": false
+            },
+            {
+              "id": "py_adv_17",
+              "label": "Day 76: Computation with NumPy and N-Dimensional Arrays",
+              "done": false
+            },
+            {
+              "id": "py_adv_18",
+              "label": "Day 77: Linear Regression and Data Visualisation with Seaborn",
+              "done": false
+            },
+            {
+              "id": "py_adv_19",
+              "label": "Day 78: Analysing the Nobel Prize with Plotly, Matplotlib & Seaborn",
+              "done": false
+            },
+            {
+              "id": "py_adv_20",
+              "label": "Day 79: The Tragic Discovery of Handwashing: t-Tests & Distributions",
+              "done": false
+            },
+            {
+              "id": "py_adv_21",
+              "label": "Day 80: Capstone Project - Predict House Prices",
+              "done": false
+            }
+          ]
+        },
+        {
+          "id": "py_pro",
+          "title": "👨‍💻 Professional (Days 81–100)",
+          "items": [
+            {
+              "id": "py_pro_0",
+              "label": "Day 81: Portfolio Project - Text to Morse Code Converter",
+              "done": false
+            },
+            {
+              "id": "py_pro_1",
+              "label": "Day 82: Portfolio Project - A Website to Show Off Your Skills",
+              "done": false
+            },
+            {
+              "id": "py_pro_2",
+              "label": "Day 83: Portfolio Project - Text-Based Tic Tac Toe Game",
+              "done": false
+            },
+            {
+              "id": "py_pro_3",
+              "label": "Day 84: Portfolio Project - Upload Images and Add a Watermark",
+              "done": false
+            },
+            {
+              "id": "py_pro_4",
+              "label": "Day 85: Portfolio Project - Tkinter Typing Speed Tester",
+              "done": false
+            },
+            {
+              "id": "py_pro_5",
+              "label": "Day 86: Portfolio Project - Breakout Game Clone with Turtle",
+              "done": false
+            },
+            {
+              "id": "py_pro_6",
+              "label": "Day 87: Portfolio Project - Cafe & Wifi Website for Remote Working",
+              "done": false
+            },
+            {
+              "id": "py_pro_7",
+              "label": "Day 88: Portfolio Project - Todo List Website with Flask",
+              "done": false
+            },
+            {
+              "id": "py_pro_8",
+              "label": "Day 89: Portfolio Project - Disappearing Text Writing App",
+              "done": false
+            },
+            {
+              "id": "py_pro_9",
+              "label": "Day 90: Portfolio Project - Convert PDF to Audiobook",
+              "done": false
+            },
+            {
+              "id": "py_pro_10",
+              "label": "Day 91: Portfolio Project - Image Colour Palette Generator",
+              "done": false
+            },
+            {
+              "id": "py_pro_11",
+              "label": "Day 92: Portfolio Project - Custom Web Scraper to Collect Data",
+              "done": false
+            },
+            {
+              "id": "py_pro_12",
+              "label": "Day 93: Portfolio Project - Automate the Google Dinosaur Game",
+              "done": false
+            },
+            {
+              "id": "py_pro_13",
+              "label": "Day 94: Portfolio Project - Space Invaders",
+              "done": false
+            },
+            {
+              "id": "py_pro_14",
+              "label": "Day 95: Portfolio Project - Custom Website Using an API",
+              "done": false
+            },
+            {
+              "id": "py_pro_15",
+              "label": "Day 96: Portfolio Project - eCommerce Website with Payment Processing",
+              "done": false
+            },
+            {
+              "id": "py_pro_16",
+              "label": "Day 97: Portfolio Project - Send a WhatsApp Message with Python",
+              "done": false
+            },
+            {
+              "id": "py_pro_17",
+              "label": "Day 98: Portfolio Project - Analyse & Visualise the Space Race",
+              "done": false
+            },
+            {
+              "id": "py_pro_18",
+              "label": "Day 99: Portfolio Project - Analysing Deaths Involving Police in the US",
+              "done": false
+            },
+            {
+              "id": "py_pro_19",
+              "label": "Day 100: Portfolio Project - Predicting Earnings with Multivariable Regression",
+              "done": false
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "entries": {}
+}
